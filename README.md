@@ -18,18 +18,6 @@ This is a learning project in order to create a simple Pebble app. It displays (
     virtualenv --python=/usr/bin/python3.7 venv
     bash
     source venv/bin/activate
-    pip install pandas
-    pip install pipreqs
-    pip install -r requirements.txt
-  ```
-
-1. Create a Python 3 environment
-
-  ```sh
-    virtualenv --python=/usr/bin/python3.7 venv
-    bash
-    source venv/bin/activate
-    pip install pandas
     pip install -r requirements.txt
   ```
 
