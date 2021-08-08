@@ -81,3 +81,7 @@ All the steps can also be done with the emulator for testing and inspect debug m
   # With Python 3.7 env
   python merge_feedback.py config.ini
   ```
+
+## Limitations
+
+1. The persistent storage on the pebble is limit to 4k. Therefore ids are chosen to be limited to 20 characters, texts to 78 characters and the number of questions/answers is 20 in one session.
