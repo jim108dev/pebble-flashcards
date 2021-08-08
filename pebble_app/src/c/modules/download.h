@@ -8,8 +8,7 @@
 #include "types.h"
 
 #define NUM_ITEMS_PER_MESSAGE 5
-#define INBOX_SIZE 256
-#define OUTBOX_SIZE 256
+#define INBOX_SIZE app_message_inbox_size_maximum()
 #define DOWNLOAD_KEY_MAX 100
 #define DOWNLOAD_KEY_DATA 200
 #define LOG_TAG 1

@@ -27,11 +27,6 @@ static void select_callback(struct MenuLayer *menu_layer, MenuIndex *cell_index,
     s_config.action(cell_index->row, s_config.extra);
 }
 
-void menu_window_set_status(char *text)
-{
-    text_layer_set_text(s_status_layer, text);
-}
-
 static void window_load(Window *window)
 {
     Layer *window_layer = window_get_root_layer(window);
@@ -47,12 +42,6 @@ static void window_load(Window *window)
                                                  });
     layer_add_child(window_layer, menu_layer_get_layer(s_menu_layer));
     menu_layer_set_selected_index(s_menu_layer, (MenuIndex){.section = 0, .row = s_config.selected}, MenuRowAlignCenter, false);
-
-    const GEdgeInsets message_insets = {.top = s_config.max_items * ITEM_HEIGHT};
-    s_status_layer = text_layer_create(grect_inset(bounds, message_insets));
-    text_layer_set_text_alignment(s_status_layer, GTextAlignmentCenter);
-    menu_window_set_status("Please Select");
-    layer_add_child(window_layer, text_layer_get_layer(s_status_layer));
 }
 
 static void window_unload(Window *window)
@@ -61,7 +50,7 @@ static void window_unload(Window *window)
     menu_layer_destroy(s_menu_layer);
 }
 
-static void deinit()
+static void menu_window_deinit()
 {
     window_destroy(s_window);
     s_window = NULL;
@@ -71,7 +60,7 @@ void menu_window_init(MenuConfig config)
 {
     if (s_window != NULL)
     {
-        deinit();
+        menu_window_deinit();
     }
 
     s_config = config;

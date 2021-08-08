@@ -4,7 +4,6 @@ static Window *s_window = NULL;
 static TextLayer *s_main_layer;
 static TextLayer *s_status_layer;
 static InfoConfig s_config;
-static uint8_t s_window_count = 0;
 static char buf[30];
 
 void click_handler(ClickRecognizerRef recognizer, void *context)
@@ -26,10 +25,7 @@ void window_load(Window *window)
 
   s_status_layer = text_layer_create(GRect(0, 0, bounds.size.w, 20));
 
-
-  snprintf(buf,sizeof(buf),"count = %d", s_window_count++);
-
-  text_layer_set_text(s_status_layer, buf);
+  text_layer_set_text(s_status_layer, s_config.status);
   text_layer_set_text_alignment(s_status_layer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(s_status_layer));
 

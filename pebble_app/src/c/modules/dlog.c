@@ -12,15 +12,16 @@ void dlog_init()
   }
 }
 
-void dlog_log(Record r)
+void dlog_log(Record i)
 {
-  DLogRecord output = {
-    .id = r.id,
-    .last_displayed = r.last_displayed
-  };
+  DLogRecord o;
+  strcpy(o.id, i.id);
+  o.feedback = i.feedback;
+  o.start = i.start;
+  o.end = i.stop;
 
-  DataLoggingResult result = data_logging_log(s_session_ref, &output, 1);
-  DEBUG("Send: %d", sizeof(DLogRecord));
+  DataLoggingResult result = data_logging_log(s_session_ref, &o, 1);
+  DEBUG("Send: %d bytes", sizeof(DLogRecord));
 
   // Was the value successfully stored? If it failed, print the reason
   if (result != DATA_LOGGING_SUCCESS)

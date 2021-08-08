@@ -29,6 +29,7 @@ void pers_read_all(Record *buf)
 void pers_write(Record record, uint num)
 {
   persist_write_data(num + RECORDS_OFFSET, &record, sizeof(Record));
+  DEBUG_RECORD(record);
 }
 
 void pers_sweep()

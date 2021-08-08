@@ -5,12 +5,13 @@ static Record *s_record = NULL;
 
 static void garbage_collection()
 {
-  FREE_SAFE(s_current);
-  FREE_SAFE(s_record);
+  free(s_current);
+  free(s_record);
 }
 
 static void start_process_item(uint8_t num, uint8_t max)
 {
+  DEBUG("Free Heap (%d)", heap_bytes_free());
   s_record = malloc(sizeof(Record));
   pers_read_single(num, s_record);
 
@@ -21,20 +22,21 @@ static void start_process_item(uint8_t num, uint8_t max)
   s_current->max = max;
   s_current->num = num;
 
-  on_show_text(s_current);
+  on_show_text1(s_current);
 }
 
-static void on_finish_record(void *data)
+static void on_finish_record(uint8_t feedback, void *data)
 {
+  DEBUG("Free Heap (%d)", heap_bytes_free());
   CurrentRecord *current = (CurrentRecord *)data;
 
   DEBUG_RECORD(*current->record);
 
-  current->record->last_displayed = time(NULL);
+  current->record->feedback = feedback;
+  current->record->stop = time(NULL);
 
   pers_write(*current->record, current->num);
-  dlog_log(*current->record);
-
+  //dlog_log(*current->record);
 
   uint8_t num = current->num + 1;
   uint8_t max = current->max;
@@ -42,45 +44,87 @@ static void on_finish_record(void *data)
 
   if (num == max)
   {
-    dlog_deinit();
-    show_summary();
+    //dlog_deinit();
+    show_last_window();
     return;
   }
-
   start_process_item(num, max);
 }
 
 static void on_start_process(void *data)
 {
+  DEBUG("Free Heap (%d)", heap_bytes_free());
   uint8_t max = pers_read_max_records();
   if (max > 0)
   {
-    dlog_init();
+    //dlog_init();
 
     start_process_item(0, max);
   }
 }
 
-static void on_show_text(void *data)
+static void on_show_text1(void *data)
 {
+  DEBUG("Free Heap (%d)", heap_bytes_free());
+  CurrentRecord *current = (CurrentRecord *)data;
+
+  DEBUG_RECORD(*current->record);
+
+  current->record->start = time(NULL);
+
+  InfoConfig c;
+  c.action = on_show_text2;
+  c.extra = current;
+  strcpy(c.main, current->record->text1);
+  snprintf(c.status, sizeof(c.status), "(%d / %d)", current->num + 1, current->max);
+  window_stack_pop_all(true);
+  info_window_init(c);
+}
+
+static void on_show_text2(void *data)
+{
+  DEBUG("Free Heap (%d)", heap_bytes_free());
   CurrentRecord *current = (CurrentRecord *)data;
 
   DEBUG_RECORD(*current->record);
 
   InfoConfig c;
-  c.action = on_finish_record;
+  c.action = on_show_feedback;
   c.extra = current;
 
-  strcpy(c.main, current->record->text);
+  strcpy(c.main, current->record->text2);
   snprintf(c.status, sizeof(c.status), "(%d / %d)", current->num + 1, current->max);
 
   window_stack_pop_all(true);
   info_window_init(c);
 }
 
-static void show_summary()
+static void on_show_feedback(void *data)
 {
-  DEBUG("show_summary");
+  DEBUG("Free Heap (%d)", heap_bytes_free());
+  CurrentRecord *current = (CurrentRecord *)data;
+
+  DEBUG_RECORD(*current->record);
+
+  MenuConfig c;
+  c.action = on_finish_record;
+  c.extra = current;
+  strcpy(c.labels[0], "Again");
+  strcpy(c.labels[1], "Hard");
+  strcpy(c.labels[2], "Good");
+  strcpy(c.labels[3], "Easy");
+
+  c.max_items = 4;
+  c.selected = current->record->feedback;
+
+  window_stack_pop_all(true);
+  menu_window_init(c);
+}
+
+static void show_first_window()
+{
+  DEBUG("Free Heap (%d)", heap_bytes_free());
+  DEBUG("show_first_window");
 
   InfoConfig c;
 
@@ -88,14 +132,34 @@ static void show_summary()
 
   if (max_records > 0)
   {
-    strcpy(c.main, "Records found.");
+    snprintf(c.main, sizeof(c.main), "%d records found. Press select to start.", max_records);
   }
   else
   {
-    strcpy(c.main, "No records found. Please run 'pebble_upload.py'.");
+    snprintf(c.main, sizeof(c.main), "%d records found. Please run 'pebble_upload.py'.", max_records);
   }
+  strcpy(c.status, "");
 
-  snprintf(c.status, sizeof(c.status), "%d records", max_records);
+  c.action = on_start_process;
+
+  window_stack_pop_all(true);
+
+  info_window_init(c);
+}
+
+static void show_last_window()
+{
+  DEBUG("Free Heap (%d)", heap_bytes_free());
+  DEBUG("show_last_window");
+
+  InfoConfig c;
+
+  uint8_t max_records = pers_read_max_records();
+
+  snprintf(c.main, sizeof(c.main), "%d questions evaluated. Press select to start again.", max_records);
+
+  strcpy(c.status, "The End");
+
   c.action = on_start_process;
 
   window_stack_pop_all(true);
@@ -105,14 +169,16 @@ static void show_summary()
 
 static void on_download_success(Record *records, uint8_t max_records)
 {
+  DEBUG("Free Heap (%d)", heap_bytes_free());
   for (int i = 0; i < max_records; i++)
   {
     pers_write(records[i], i);
   }
+  download_deinit();
 
   pers_write_max_records(max_records);
 
-  show_summary();
+  show_first_window();
 }
 
 static void on_download_fail(char msg[MAX_TEXT_LEN])
@@ -124,10 +190,10 @@ static void on_download_fail(char msg[MAX_TEXT_LEN])
 
 static void init()
 {
-  //pers_sweep();
+  pers_sweep();
   AppLaunchReason appLaunchReason = launch_reason();
 
-  show_summary();
+  show_first_window();
 
   if (appLaunchReason == APP_LAUNCH_PHONE)
   {
@@ -139,7 +205,7 @@ static void init()
 
 static void deinit()
 {
-  dlog_deinit();
+  //dlog_deinit();
   garbage_collection();
 }
 

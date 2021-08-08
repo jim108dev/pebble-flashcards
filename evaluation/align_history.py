@@ -13,6 +13,8 @@ from util import get_conf
 
 OUTPUT_COLUMNS = ["id","feedback_history","start_history","stop_history"]
 
+NOW = (date.today() - datetime.datetime(1970,1,1)).total_seconds()
+
 def main(conf):
     ref_df = pd.read_csv(conf.reference_filename, sep=';')
     history_df = pd.read_csv(conf.history_filename, sep=';')

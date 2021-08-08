@@ -21,4 +21,18 @@ This is a learning project in order to create a simple Pebble app. It displays (
     pip install -r requirements.txt
   ```
 
+1. Install on the emulator
+
+  ```sh
+  cd pebble_app
+  pebble build && pebble install --logs --emulator aplite
+  ```
+
+1. Install on the device
+
+  ```sh
+  # Pair the device before
+  cd pebble_app
+  pebble build && pebble install --serial /dev/rfcomm0
+
 ## Usage

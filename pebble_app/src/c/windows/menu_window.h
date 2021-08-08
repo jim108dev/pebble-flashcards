@@ -1,9 +1,9 @@
 #pragma once // Prevent errors from being included multiple times
 
 #include <pebble.h>
-#include "util.h"
+#include "../modules/util.h"
 
-typedef void(ActionCallback)(uint8_t choice, void *data);
+typedef void(ActionCallback)(uint8_t feedback, void *data);
 
 typedef struct MenuConfig
 {

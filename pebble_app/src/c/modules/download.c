@@ -28,9 +28,12 @@ Record parse_data(char *data)
   ProcessingState *state = data_processor_create(data, ';');
 
   Record r;
-  r.id = data_processor_get_int(state);
-  strcpy(r.text, data_processor_get_string(state));
-  r.last_displayed = data_processor_get_int(state);
+  strcpy(r.id, data_processor_get_string(state));
+  strcpy(r.text1, data_processor_get_string(state));
+  strcpy(r.text2, data_processor_get_string(state));
+  r.feedback = data_processor_get_int(state);
+  r.start = data_processor_get_int(state);
+  r.stop = data_processor_get_int(state);
 
   data_processor_destroy(state);
   return r;
@@ -45,7 +48,7 @@ static void inbox_received_handler(DictionaryIterator *iter, void *context)
     s_max_records = packet_get_uint8(iter, DOWNLOAD_KEY_MAX);
     s_records = malloc(sizeof(Record) * s_max_records);
 
-    DEBUG("Max key received");
+    DEBUG("Max records (%d) received", s_max_records);
     return;
   }
 
@@ -60,6 +63,8 @@ static void inbox_received_handler(DictionaryIterator *iter, void *context)
     }
 
     Record record = parse_data(data);
+
+    DEBUG_RECORD(record);
 
     s_records[s_num_received] = record;
 
@@ -81,6 +86,7 @@ static void timeout_timer_handler(void *context)
 {
   s_timeout_timer = NULL;
   close_connection();
+  DEBUG("Connection timeout (inbox size = %ld)", INBOX_SIZE);
   s_fail("Connection timeout");
 }
 
@@ -92,12 +98,11 @@ void download_init(DownloadSuccessCallback success,DownloadFailCallback fail)
                                                                    .received = inbox_received_handler},
                                                                NULL);
   events_app_message_request_inbox_size(INBOX_SIZE);
-  events_app_message_request_outbox_size(OUTBOX_SIZE);
   events_app_message_open();
 
   s_timeout_timer = app_timer_register(TIMEOUT, timeout_timer_handler, NULL);
 
-  DEBUG("Waiting for connection");
+  DEBUG("Waiting for connection (inbox size = %ld)", INBOX_SIZE);
 }
 
 void download_deinit()

@@ -2,14 +2,18 @@
 
 #include <pebble.h> // Pebble SDK symbols
 
+#define MAX_ID_LEN    20
 #define MAX_TEXT_LEN 100
 
 typedef struct Record
 {
-    uint8_t id;               //  1 bytes
-    char text[MAX_TEXT_LEN];  // 100 bytes
-    time_t last_displayed;    //   4 bytes
-} Record;                     // 105 bytes
+    char id[MAX_ID_LEN];      //  20 bytes
+    char text1[MAX_TEXT_LEN]; // 100 bytes
+    char text2[MAX_TEXT_LEN]; // 100 bytes
+    uint8_t feedback;         //   1 byte
+    time_t start;             //   4 bytes
+    time_t stop;              //   4 bytes
+} Record;                     // 229 bytes
 
 typedef void (*DownloadSuccessCallback)(Record records[], uint8_t max_records);
 typedef void (*DownloadFailCallback)(char message[MAX_TEXT_LEN]);

@@ -2,9 +2,13 @@
 
 void record_to_string(char buf[MAX_TEXT_LEN], Record r)
 {
-    char time_buf[MAX_TEXT_LEN];
-    time_to_string(time_buf, r.last_displayed);
-    snprintf(buf, MAX_TEXT_LEN, "Record (%d;'%s';%s)", r.id, r.text, time_buf);
+    char time_buf1[MAX_TEXT_LEN];
+    time_to_string(time_buf1, r.start);
+    
+    char time_buf2[MAX_TEXT_LEN];
+    time_to_string(time_buf2, r.stop);
+    
+    snprintf(buf, MAX_TEXT_LEN, "Record ('%s';'%.5s...';'%.5s...';%d,%ld,%ld)", r.id, r.text1, r.text2, r.feedback, r.start, r.stop);
 }
 
 void time_to_string(char buf[MAX_TEXT_LEN], time_t rawtime)

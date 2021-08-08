@@ -27,11 +27,12 @@ def main(conf):
     df = pd.read_csv(conf.history_filename, sep=';')
 
     df['waiting_period'] = df['feedback_history'].apply(
-        lambda cs: supermemo_2([int(v) for v in str(cs).split('|')]))
+        lambda cs: 0 if isna(cs) else supermemo_2([int(v) for v in str(cs).split('|')]))
 
-    df['countdown'] = df.apply(lambda x: countdown(
+    df['countdown'] = df.apply(lambda x: 0 if isna(x['stop_history']) else countdown(
         x['stop_history'].split('|')[-1], x['waiting_period']), axis=1)
 
+    df = df[df['countdown'] <= 1]
     df = df.nsmallest(conf.max_records, 'countdown')
 
     ref_df = pd.read_csv(conf.reference_filename, sep=';')
