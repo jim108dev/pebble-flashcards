@@ -6,6 +6,8 @@
 
 import os
 import os.path
+import shutil
+import tempfile
 
 import pandas as pd
 from pandas.core.dtypes.missing import isna
@@ -62,7 +64,7 @@ def main(conf):
     df.to_csv(path_or_buf=conf.history_filename,
               columns=OUTPUT_COLUMNS, index=False, sep=";")
 
-    os.remove(conf.feedback_filename)
+    shutil.move(conf.feedback_filename, tempfile.gettempdir())
 
 
 if __name__ == "__main__":
