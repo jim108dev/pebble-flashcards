@@ -3,12 +3,12 @@
 static Window *s_window = NULL;
 static TextLayer *s_main_layer;
 static TextLayer *s_status_layer;
-static InfoConfig s_config;
+static InfoConfig *s_config;
 static char buf[30];
 
 void click_handler(ClickRecognizerRef recognizer, void *context)
 {
-  s_config.action(s_config.extra);
+  s_config->action(s_config->extra);
 }
 
 void click_provider(void *context)
@@ -25,14 +25,14 @@ void window_load(Window *window)
 
   s_status_layer = text_layer_create(GRect(0, 0, bounds.size.w, 20));
 
-  text_layer_set_text(s_status_layer, s_config.status);
+  text_layer_set_text(s_status_layer, s_config->status);
   text_layer_set_text_alignment(s_status_layer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(s_status_layer));
 
   GRect max_text_bounds = GRect(5, 20, bounds.size.w, bounds.size.h);
   s_main_layer = text_layer_create(max_text_bounds);
   text_layer_set_font(s_main_layer, fonts_get_system_font(FONT_KEY_ROBOTO_CONDENSED_21));
-  text_layer_set_text(s_main_layer, s_config.main);
+  text_layer_set_text(s_main_layer, s_config->main);
   text_layer_set_text_alignment(s_main_layer, GTextAlignmentLeft);
 
   GSize max_size = GSize(max_text_bounds.size.w - max_text_bounds.origin.x, max_text_bounds.size.h - max_text_bounds.origin.y);
@@ -60,12 +60,14 @@ static void info_window_deinit()
 {
   window_destroy(s_window);
   s_window = NULL;
+  FREE_SAFE(s_config);
 }
 
-void info_window_init(InfoConfig config)
+void info_window_init(InfoConfig *config)
 {
   if (s_window != NULL)
   {
+    window_stack_pop_all(false);
     info_window_deinit();
   }
 
@@ -77,6 +79,5 @@ void info_window_init(InfoConfig config)
                                            .load = window_load,
                                            .unload = window_unload,
                                        });
-
   window_stack_push(s_window, true);
 }

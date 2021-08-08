@@ -20,6 +20,7 @@ void dlog_log(Record i)
   o.start = i.start;
   o.end = i.stop;
 
+  
   DataLoggingResult result = data_logging_log(s_session_ref, &o, 1);
   DEBUG("Send: %d bytes", sizeof(DLogRecord));
 

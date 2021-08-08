@@ -16,4 +16,4 @@ typedef struct MenuConfig
 
 #define ITEM_HEIGHT 30
 
-void menu_window_init(MenuConfig config);
+void menu_window_init(MenuConfig *config);

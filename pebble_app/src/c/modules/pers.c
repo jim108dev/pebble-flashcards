@@ -14,6 +14,7 @@ void pers_write_max_records(uint8_t max)
 
 void pers_read_single(uint8_t num, Record* buf)
 {
+  DEBUG("Read record num %d", num);
   persist_read_data(num + RECORDS_OFFSET, buf, sizeof(Record));
 }
 

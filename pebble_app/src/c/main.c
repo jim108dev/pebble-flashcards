@@ -1,27 +1,18 @@
 #include "main.h"
 
-static CurrentRecord *s_current = NULL;
-static Record *s_record = NULL;
-
-static void garbage_collection()
-{
-  free(s_current);
-  free(s_record);
-}
-
 static void start_process_item(uint8_t num, uint8_t max)
 {
-  s_record = malloc(sizeof(Record));
-  pers_read_single(num, s_record);
+  Record *record = malloc(sizeof(Record));
+  pers_read_single(num, record);
 
-  DEBUG_RECORD(*s_record);
+  DEBUG_RECORD(*record);
 
-  s_current = malloc(sizeof(CurrentRecord));
-  s_current->record = s_record;
-  s_current->max = max;
-  s_current->num = num;
+  CurrentRecord *current = malloc(sizeof(CurrentRecord));
+  current->record = record;
+  current->max = max;
+  current->num = num;
 
-  on_show_text1(s_current);
+  on_show_text1(current);
 }
 
 static void on_finish_record(uint8_t feedback, void *data)
@@ -38,7 +29,9 @@ static void on_finish_record(uint8_t feedback, void *data)
 
   uint8_t num = current->num + 1;
   uint8_t max = current->max;
-  garbage_collection();
+
+  FREE_SAFE(current->record);
+  FREE_SAFE(current);
 
   if (num == max)
   {
@@ -61,35 +54,36 @@ static void on_start_process(void *data)
 
 static void on_show_text1(void *data)
 {
+  DEBUG("-");
   CurrentRecord *current = (CurrentRecord *)data;
 
   DEBUG_RECORD(*current->record);
 
   current->record->start = time(NULL);
 
-  InfoConfig c;
-  c.action = on_show_text2;
-  c.extra = current;
-  strcpy(c.main, current->record->text1);
-  snprintf(c.status, sizeof(c.status), "(%d / %d)", current->num + 1, current->max);
-  window_stack_pop_all(true);
+  InfoConfig *c = malloc(sizeof(InfoConfig));
+  c->action = on_show_text2;
+  c->extra = current;
+  strcpy(c->main, current->record->text1);
+  snprintf(c->status, sizeof(c->status), "(%d / %d)", current->num + 1, current->max);
+
   info_window_init(c);
 }
 
 static void on_show_text2(void *data)
 {
+  DEBUG("-");
   CurrentRecord *current = (CurrentRecord *)data;
 
   DEBUG_RECORD(*current->record);
 
-  InfoConfig c;
-  c.action = on_show_feedback;
-  c.extra = current;
+  InfoConfig *c = malloc(sizeof(InfoConfig));
+  c->action = on_show_feedback;
+  c->extra = current;
 
-  strcpy(c.main, current->record->text2);
-  snprintf(c.status, sizeof(c.status), "(%d / %d)", current->num + 1, current->max);
+  strcpy(c->main, current->record->text2);
+  snprintf(c->status, sizeof(c->status), "(%d / %d)", current->num + 1, current->max);
 
-  window_stack_pop_all(true);
   info_window_init(c);
 }
 
@@ -99,57 +93,52 @@ static void on_show_feedback(void *data)
 
   DEBUG_RECORD(*current->record);
 
-  MenuConfig c;
-  c.action = on_finish_record;
-  c.extra = current;
-  strcpy(c.labels[0], "Again");
-  strcpy(c.labels[1], "Hard");
-  strcpy(c.labels[2], "Good");
-  strcpy(c.labels[3], "Easy");
+  MenuConfig *c = malloc(sizeof(MenuConfig));
+  c->action = on_finish_record;
+  c->extra = current;
+  strcpy(c->labels[0], "Again");
+  strcpy(c->labels[1], "Hard");
+  strcpy(c->labels[2], "Good");
+  strcpy(c->labels[3], "Easy");
 
-  c.max_items = 4;
-  c.selected = current->record->feedback;
+  c->max_items = 4;
+  c->selected = current->record->feedback;
 
-  window_stack_pop_all(true);
   menu_window_init(c);
 }
 
 static void show_first_window()
 {
-  InfoConfig c;
+  InfoConfig *c = malloc(sizeof(InfoConfig));
 
   uint8_t max_records = pers_read_max_records();
 
   if (max_records > 0)
   {
-    snprintf(c.main, sizeof(c.main), "%d records found. Press select to start.", max_records);
+    snprintf(c->main, sizeof(c->main), "%d records found. Press select to start.", max_records);
+    c->action = on_start_process;
   }
   else
   {
-    snprintf(c.main, sizeof(c.main), "%d records found. Please run 'pebble_upload.py'.", max_records);
+    snprintf(c->main, sizeof(c->main), "%d records found. Please run 'pebble_upload.py'.", max_records);
+    c->action = NULL;
   }
-  strcpy(c.status, "");
-
-  c.action = on_start_process;
-
-  window_stack_pop_all(true);
+  strcpy(c->status, "");
 
   info_window_init(c);
 }
 
 static void show_last_window()
 {
-  InfoConfig c;
+  InfoConfig *c = malloc(sizeof(InfoConfig));
 
   uint8_t max_records = pers_read_max_records();
 
-  snprintf(c.main, sizeof(c.main), "%d questions evaluated. Press select to start again.", max_records);
+  snprintf(c->main, sizeof(c->main), "%d questions evaluated. Press select to start again.", max_records);
 
-  strcpy(c.status, "The End");
+  strcpy(c->status, "The End");
 
-  c.action = on_start_process;
-
-  window_stack_pop_all(true);
+  c->action = on_start_process;
 
   info_window_init(c);
 }
@@ -182,23 +171,24 @@ static void download_fail(char msg[MAX_TEXT_LEN])
 
 static void init()
 {
-  pers_sweep();
   AppLaunchReason appLaunchReason = launch_reason();
-
-  show_first_window();
 
   if (appLaunchReason == APP_LAUNCH_PHONE)
   {
+    //pers_sweep();
+    show_first_window();
     download_init(download_success, download_fail);
     // If app was launched by phone and close to last app is disabled, always exit to the watchface instead of to the menu
     exit_reason_set(APP_EXIT_ACTION_PERFORMED_SUCCESSFULLY);
+    return;
   }
+
+  show_first_window();
 }
 
 static void deinit()
 {
   dlog_deinit();
-  garbage_collection();
 }
 
 int main()
