@@ -21,6 +21,16 @@ This is a learning project in order to create a simple Pebble app. It displays (
     pip install -r requirements.txt
   ```
 
+1. Set custom questions and and answers in `reference.csv`.
+
+1. Align the history file
+
+  ```sh
+  # with venv environment
+  cd evaluation
+  python algin_history.py config.ini
+  ```
+  
 1. Install on the emulator
 
   ```sh
