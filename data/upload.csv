@@ -1,21 +1,21 @@
 id;text1;text2;feedback;start;stop
-15;01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789;7x10^-9 (Comfort,2020,p. 80);0;0;0
-1;How many drivers in the US are texting right now?;200,000 (Comfort,2020,p. 35);0;0;0
-2;How many breaths does a human take in a lifetime?;3x10^8 (Comfort,2020,p. 41);0;0;0
-3;How many heartbeats does a human heart take in a lifetime?;3x10^9 (Comfort,2020,p. 43);0;0;0
-4;How many hours of sleep in a lifetime?;225,000 (Comfort,2020,p. 43);0;0;0
-5;How long does a pain signal from the foot take to be present in the brain?;120msec (Comfort,2020,p. 46);0;0;0
-6;What is the surface area of a human being?;2 m^2 (Comfort,2020,p. 51);0;0;0
-7;What is the volume of a human being?;8x10^-2 m^3 (Comfort,2020,p. 53);0;0;0
-8;How many cells are in a human body?;8x10^13 (Comfort,2020,p. 55);0;0;0
-9;How much energy does a human use to climb up one floor on stairs?;74 kJ (Comfort,2020,p. 58);0;0;0
-10;What is the metabolic rate of a human being?;150W (Comfort,2020,p. 61);0;0;0
-11;How many words a in a book on average?;10^5 (Comfort,2020,p. 65);0;0;0
-12;How much memory storage does a book require?;400 kbytes (Comfort,2020,p. 67);0;0;0
-13;How many books are in the library of congress?;60x10^6 (Comfort,2020,p. 70);0;0;0
-14;What is the speed of reading?;170 words/min (Comfort,2020,p. 74);0;0;0
-16;What is the probability to get struck by a lightning?;3x10^-6 (Comfort,2020,p. 81);0;0;0
-17;How many doctors are there in the US?;10^5 (Comfort,2020,p. 85);0;0;0
-18;How many patients can a doctor see per year?;8000 (Comfort,2020,p. 88);0;0;0
-19;How long is the average wait at the doctor's office?;45 mins (Comfort,2020,p. 90);0;0;0
-20;How many hospital beds are there in the US?;800,000 (Comfort,2020,p. 96);0;0;0
+1;How many drivers in the US are texting right now?;200,000;0;0;0
+2;How many breaths does a human take in a lifetime?;3x10^8;0;0;0
+3;How many heartbeats does a human heart take in a lifetime?;3x10^9;0;0;0
+4;How many hours of sleep in a lifetime?;225,000;0;0;0
+5;How long does a pain signal from the foot take to be present in the brain?;120msec;0;0;0
+6;What is the surface area of a human being?;2 m^2;0;0;0
+7;What is the volume of a human being?;8x10^-2 m^3;0;0;0
+8;How many cells are in a human body?;8x10^13;0;0;0
+9;How much energy does a human use to climb up one floor on stairs?;74 kJ;0;0;0
+10;What is the metabolic rate of a human being?;150W;0;0;0
+11;How many words a in a book on average?;10^5;0;0;0
+12;How much memory storage does a book require?;400 kbytes;0;0;0
+13;How many books are in the library of congress?;60x10^6;0;0;0
+14;What is the speed of reading?;170 words/min;0;0;0
+15;What is the probability that a house in the US will be struck by a meteority?;7x10^-9;0;0;0
+16;What is the probability to get struck by a lightning?;3x10^-6;0;0;0
+17;How many doctors are there in the US?;10^5;0;0;0
+18;How many patients can a doctor see per year?;8000;0;0;0
+19;How long is the average wait at the doctor's office?;45 mins;0;0;0
+20;How many hospital beds are there in the US?;800,000;0;0;0

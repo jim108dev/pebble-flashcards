@@ -46,3 +46,38 @@ This is a learning project in order to create a simple Pebble app. It displays (
   pebble build && pebble install --serial /dev/rfcomm0
 
 ## Usage
+
+All the steps can also be done with the emulator for testing and inspect debug messages. Just use `config_emu.ini`.
+
+1. Create `upload.csv`
+
+  ```sh
+  cd evaluation
+  # With Python 3.7 env
+  python prepare_next_session.py config.ini
+  ```
+
+1. Run the pebble app/ activate bluetooth
+  
+1. Upload the csv file
+
+  ```sh
+  # Alter the path to pebble-pc-template accordingly
+  # With Python 2.7 env
+  python ~/github/pebble-pc-communication-example/host_python/pebble_upload.py config_watch.ini
+  ```
+
+1. Gather feedback on the watch
+1. Download
+
+  ```sh
+  python ~/github/pebble-pc-communication-example/host_python/pebble_download.py config_watch.ini
+  ```
+
+1. Merge feedback
+
+  ```sh
+  cd evaluation
+  # With Python 3.7 env
+  python merge_feedback.py config.ini
+  ```

@@ -54,7 +54,7 @@ id;text1;text2;source;tags
 53;How much solar energy reaches the Earth in one year?;4x10^24 J;Weinstein,2008,p. 123;energy light
 54;What fraction of the US is needed to power it only with solar panels?;4x10^-3;Weinstein,2008,p. 225;energy area environment
 55;How much electrical power can a wind turbine generate?;3 MW;Weinstein,2008,p. 229;energy wind environment
-56;How much fuel does a 1 GW coal-fired power plant require;in 100-ton railroad cars per day?;1;Weinstein,2008,p. 233;energy environment
+56;How much fuel does a 1 GW coal-fired power plant require in 100-ton railroad cars per day?;1;Weinstein,2008,p. 233;energy environment
 57;How much fuel does a 1 GW nuclear power plant require in one year?;2x10^4 kg;Weinstein,2008,p. 237; energy environment
 58;What is the mass of the atmosphere?;4x10^18kg;Weinstein,2008,p. 245;air
 59;How much carbon dioxide in kg does a 1-GW coal-fired power plant release into the atmosphere each year? What fraction of the mass of the atmosphere is this?;5x10^-9;Weinstein,2008,p. 254;air,environment
