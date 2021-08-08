@@ -54,6 +54,7 @@ static void menu_window_deinit()
 {
     window_destroy(s_window);
     s_window = NULL;
+    FREE_SAFE(s_config);
 }
 
 void menu_window_init(MenuConfig *config)
