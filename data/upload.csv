@@ -1,4 +1,5 @@
 id;text1;text2;feedback;start;stop
+15;01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789;7x10^-9 (Comfort,2020,p. 80);0;0;0
 1;How many drivers in the US are texting right now?;200,000 (Comfort,2020,p. 35);0;0;0
 2;How many breaths does a human take in a lifetime?;3x10^8 (Comfort,2020,p. 41);0;0;0
 3;How many heartbeats does a human heart take in a lifetime?;3x10^9 (Comfort,2020,p. 43);0;0;0
@@ -13,7 +14,6 @@ id;text1;text2;feedback;start;stop
 12;How much memory storage does a book require?;400 kbytes (Comfort,2020,p. 67);0;0;0
 13;How many books are in the library of congress?;60x10^6 (Comfort,2020,p. 70);0;0;0
 14;What is the speed of reading?;170 words/min (Comfort,2020,p. 74);0;0;0
-15;What is the probability that a house in the US will be struck by a meteority?;7x10^-9 (Comfort,2020,p. 80);0;0;0
 16;What is the probability to get struck by a lightning?;3x10^-6 (Comfort,2020,p. 81);0;0;0
 17;How many doctors are there in the US?;10^5 (Comfort,2020,p. 85);0;0;0
 18;How many patients can a doctor see per year?;8000 (Comfort,2020,p. 88);0;0;0

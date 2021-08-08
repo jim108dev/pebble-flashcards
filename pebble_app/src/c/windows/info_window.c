@@ -2,7 +2,8 @@
 
 static Window *s_window = NULL;
 static TextLayer *s_main_layer;
-static TextLayer *s_status_layer;
+static TextLayer *s_head_left_layer;
+static TextLayer *s_head_right_layer;
 static InfoConfig *s_config;
 static char buf[30];
 
@@ -23,13 +24,19 @@ void window_load(Window *window)
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
 
-  s_status_layer = text_layer_create(GRect(0, 0, bounds.size.w, 20));
+  s_head_left_layer = text_layer_create(GRect(PADDING, 0, bounds.size.w/2-PADDING, HEAD_HEIGHT));
 
-  text_layer_set_text(s_status_layer, s_config->status);
-  text_layer_set_text_alignment(s_status_layer, GTextAlignmentCenter);
-  layer_add_child(window_layer, text_layer_get_layer(s_status_layer));
+  text_layer_set_text(s_head_left_layer, s_config->head_left);
+  text_layer_set_text_alignment(s_head_left_layer, GTextAlignmentLeft);
+  layer_add_child(window_layer, text_layer_get_layer(s_head_left_layer));
 
-  GRect max_text_bounds = GRect(5, 20, bounds.size.w, bounds.size.h);
+  s_head_right_layer = text_layer_create(GRect(bounds.size.w/2, 0, bounds.size.w/2-PADDING, HEAD_HEIGHT));
+
+  text_layer_set_text(s_head_right_layer, s_config->head_right);
+  text_layer_set_text_alignment(s_head_right_layer, GTextAlignmentRight);
+  layer_add_child(window_layer, text_layer_get_layer(s_head_right_layer));
+
+  GRect max_text_bounds = GRect(PADDING, HEAD_HEIGHT, bounds.size.w-PADDING, bounds.size.h);
   s_main_layer = text_layer_create(max_text_bounds);
   text_layer_set_font(s_main_layer, fonts_get_system_font(FONT_KEY_ROBOTO_CONDENSED_21));
   text_layer_set_text(s_main_layer, s_config->main);
@@ -40,9 +47,14 @@ void window_load(Window *window)
   layer_add_child(window_layer, text_layer_get_layer(s_main_layer));
 }
 
-void info_window_set_status(char text[MAX_TEXT_LEN])
+void info_window_set_head_left(char text[MAX_TEXT_LEN])
 {
-  text_layer_set_text(s_status_layer, text);
+  text_layer_set_text(s_head_left_layer, text);
+}
+
+void info_window_set_head_right(char text[MAX_TEXT_LEN])
+{
+  text_layer_set_text(s_head_right_layer, text);
 }
 
 void info_window_set_main(char text[MAX_TEXT_LEN])
@@ -52,7 +64,8 @@ void info_window_set_main(char text[MAX_TEXT_LEN])
 
 void window_unload(Window *window)
 {
-  text_layer_destroy(s_status_layer);
+  text_layer_destroy(s_head_left_layer);
+  text_layer_destroy(s_head_right_layer);
   text_layer_destroy(s_main_layer);
 }
 
@@ -67,7 +80,7 @@ void info_window_init(InfoConfig *config)
 {
   if (s_window != NULL)
   {
-    window_stack_pop_all(false);
+    window_stack_pop_all(true);
     info_window_deinit();
   }
 

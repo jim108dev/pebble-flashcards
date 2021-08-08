@@ -23,22 +23,6 @@ void close_connection()
   }
 }
 
-Record parse_data(char *data)
-{
-  ProcessingState *state = data_processor_create(data, ';');
-
-  Record r;
-  strcpy(r.id, data_processor_get_string(state));
-  strcpy(r.text1, data_processor_get_string(state));
-  strcpy(r.text2, data_processor_get_string(state));
-  r.feedback = data_processor_get_int(state);
-  r.start = data_processor_get_int(state);
-  r.stop = data_processor_get_int(state);
-
-  data_processor_destroy(state);
-  return r;
-}
-
 static void inbox_received_handler(DictionaryIterator *iter, void *context)
 {
   DEBUG("Inbox received");
@@ -62,11 +46,21 @@ static void inbox_received_handler(DictionaryIterator *iter, void *context)
       return;
     }
 
-    Record record = parse_data(data);
+    ProcessingState *state = data_processor_create(data, ';');
 
-    DEBUG_RECORD(record);
+    Record r;
+    small_textcpy(r.id, data_processor_get_string(state));
+    textcpy(r.text1, data_processor_get_string(state));
+    textcpy(r.text2, data_processor_get_string(state));
+    r.feedback = data_processor_get_int(state);
+    r.start = data_processor_get_int(state);
+    r.stop = data_processor_get_int(state);
 
-    s_records[s_num_received] = record;
+    data_processor_destroy(state);
+
+    DEBUG_RECORD(r);
+
+    s_records[s_num_received] = r;
 
     s_num_received++;
 

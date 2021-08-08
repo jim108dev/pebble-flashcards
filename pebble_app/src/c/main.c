@@ -44,6 +44,7 @@ static void on_finish_record(uint8_t feedback, void *data)
 
 static void on_start_process(void *data)
 {
+  download_deinit();
   uint8_t max = pers_read_max_records();
   if (max > 0)
   {
@@ -54,7 +55,6 @@ static void on_start_process(void *data)
 
 static void on_show_text1(void *data)
 {
-  DEBUG("-");
   CurrentRecord *current = (CurrentRecord *)data;
 
   DEBUG_RECORD(*current->record);
@@ -64,15 +64,16 @@ static void on_show_text1(void *data)
   InfoConfig *c = malloc(sizeof(InfoConfig));
   c->action = on_show_text2;
   c->extra = current;
+
+  strcpy(c->head_left, current->record->id);
+  snprintf(c->head_right, sizeof(c->head_right), "%d/%d", current->num + 1, current->max);
   strcpy(c->main, current->record->text1);
-  snprintf(c->status, sizeof(c->status), "(%d / %d)", current->num + 1, current->max);
 
   info_window_init(c);
 }
 
 static void on_show_text2(void *data)
 {
-  DEBUG("-");
   CurrentRecord *current = (CurrentRecord *)data;
 
   DEBUG_RECORD(*current->record);
@@ -81,8 +82,9 @@ static void on_show_text2(void *data)
   c->action = on_show_feedback;
   c->extra = current;
 
+  strcpy(c->head_left, current->record->id);
+  snprintf(c->head_right, sizeof(c->head_right), "%d/%d", current->num + 1, current->max);
   strcpy(c->main, current->record->text2);
-  snprintf(c->status, sizeof(c->status), "(%d / %d)", current->num + 1, current->max);
 
   info_window_init(c);
 }
@@ -114,16 +116,18 @@ static void show_first_window()
   uint8_t max_records = pers_read_max_records();
 
   if (max_records > 0)
-  {
-    snprintf(c->main, sizeof(c->main), "%d records found. Press select to start.", max_records);
+  {;
+    strcpy(c->main, "Questions are ready. Press 'select' to start.");
     c->action = on_start_process;
   }
   else
   {
-    snprintf(c->main, sizeof(c->main), "%d records found. Please run 'pebble_upload.py'.", max_records);
+    strcpy(c->main, "No questions found. Please run 'pebble_upload.py'.");
     c->action = NULL;
   }
-  strcpy(c->status, "");
+
+  strcpy(c->head_left, "");
+  snprintf(c->head_right, sizeof(c->head_right), "%d/%d", 0, max_records);
 
   info_window_init(c);
 }
@@ -134,9 +138,9 @@ static void show_last_window()
 
   uint8_t max_records = pers_read_max_records();
 
-  snprintf(c->main, sizeof(c->main), "%d questions evaluated. Press select to start again.", max_records);
-
-  strcpy(c->status, "The End");
+  strcpy(c->head_left, "The End");
+  snprintf(c->head_right, sizeof(c->head_right), "%d/%d", max_records, max_records);
+  strcpy(c->main, "All questions evaluated. Press 'select' to start again.");
 
   c->action = on_start_process;
 
@@ -164,7 +168,7 @@ static void download_success(Record *records, uint8_t max_records)
 
 static void download_fail(char msg[MAX_TEXT_LEN])
 {
-  info_window_set_main("Download failed. Please try 'pebble_upload.py' again or press select for demo mode");
+  info_window_set_main("Download failed. Please try 'pebble_upload.py' again");
 
   download_deinit();
 }
@@ -175,7 +179,7 @@ static void init()
 
   if (appLaunchReason == APP_LAUNCH_PHONE)
   {
-    //pers_sweep();
+    pers_sweep();
     show_first_window();
     download_init(download_success, download_fail);
     // If app was launched by phone and close to last app is disabled, always exit to the watchface instead of to the menu

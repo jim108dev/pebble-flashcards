@@ -30,3 +30,15 @@ uint8_t packet_get_uint8(DictionaryIterator *inbox_iter, int key)
     }
     return dict_find(inbox_iter, key)->value->uint8;
 }
+
+char *textcpy(char * dest, const char * src){
+    strncpy(dest, src, MAX_TEXT_LEN);
+    dest[MAX_TEXT_LEN-1] = '\0';
+    return dest;
+}
+
+char *small_textcpy(char * dest, const char * src){
+    strncpy(dest, src, MAX_SMALL_TEXT_LEN);
+    dest[MAX_SMALL_TEXT_LEN-1] = '\0';
+    return dest;
+}

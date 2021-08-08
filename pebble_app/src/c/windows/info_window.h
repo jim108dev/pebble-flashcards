@@ -4,17 +4,21 @@
 #include "../modules/types.h"
 #include "../modules/util.h"
 
+#define PADDING 5
+#define HEAD_HEIGHT 20
 typedef void(DoneCallback)(void *data);
 
 typedef struct InfoConfig
 {
+    char head_left[MAX_TEXT_LEN];
+    char head_right[MAX_TEXT_LEN];
     char main[MAX_TEXT_LEN];
-    char status[MAX_TEXT_LEN];
     DoneCallback *action;
     void *extra;
 
 } InfoConfig;
 
 void info_window_init(InfoConfig *config);
-void info_window_set_status(char text[]);
+void info_window_set_head_left(char text[]);
+void info_window_set_head_right(char text[]);
 void info_window_set_main(char text[]);

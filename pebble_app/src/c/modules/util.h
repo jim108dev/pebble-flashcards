@@ -27,3 +27,6 @@ void record_to_string(char buf[MAX_TEXT_LEN], Record r);
 #define DEBUG_RECORD(record) char debug_buf[MAX_TEXT_LEN]; record_to_string(debug_buf, record); DEBUG(debug_buf);
 
 #define FREE_SAFE(ptr) if (NULL != ptr) { free(ptr); ptr = NULL; }
+
+char *textcpy(char * dest, const char * src);
+char *small_textcpy(char * dest, const char * src);

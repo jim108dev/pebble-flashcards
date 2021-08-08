@@ -8,7 +8,7 @@
 #define LOG_TAG 1
 typedef struct DLogRecord
 {
-    char id[MAX_ID_LEN];      //  20 bytes
+    char id[MAX_SMALL_TEXT_LEN];      //  20 bytes
     uint8_t feedback;         //   1 byte
     time_t start;             //   4 bytes
     time_t end;               //   4 bytes

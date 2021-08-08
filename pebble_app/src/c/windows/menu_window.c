@@ -4,7 +4,7 @@
 static Window *s_window = NULL;
 static MenuLayer *s_menu_layer;
 static MenuConfig *s_config;
-static TextLayer *s_status_layer;
+static TextLayer *s_head_left_layer;
 ;
 
 static uint16_t get_num_rows_callback(MenuLayer *menu_layer, uint16_t section_index, void *context)
@@ -46,7 +46,7 @@ static void window_load(Window *window)
 
 static void window_unload(Window *window)
 {
-    text_layer_destroy(s_status_layer);
+    text_layer_destroy(s_head_left_layer);
     menu_layer_destroy(s_menu_layer);
 }
 
@@ -60,7 +60,7 @@ void menu_window_init(MenuConfig *config)
 {
     if (s_window != NULL)
     {
-        window_stack_pop_all(false);
+        window_stack_pop_all(true);
         menu_window_deinit();
     }
 
