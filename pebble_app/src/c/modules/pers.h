@@ -17,6 +17,6 @@ void pers_read_single(uint8_t num, Record* buf);
 
 void pers_read_all(Record *buf);
 
-void pers_write(Record record, uint num);
+int pers_write(Record record, uint num);
 
 void pers_sweep();

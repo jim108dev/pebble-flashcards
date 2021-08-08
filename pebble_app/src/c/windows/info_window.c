@@ -64,7 +64,7 @@ static void info_window_deinit()
 
 void info_window_init(InfoConfig config)
 {
-  if (s_window == NULL)
+  if (s_window != NULL)
   {
     info_window_deinit();
   }

@@ -26,15 +26,14 @@ void pers_read_all(Record *buf)
   }
 }
 
-void pers_write(Record record, uint num)
+int pers_write(Record record, uint num)
 {
-  persist_write_data(num + RECORDS_OFFSET, &record, sizeof(Record));
-  DEBUG_RECORD(record);
+  return persist_write_data(num + RECORDS_OFFSET, &record, sizeof(Record));
 }
 
 void pers_sweep()
 {
-  for (int i = 0; i < 256; i++)
+  for (uint8_t i = 0; i < 255; i++)
   {
     persist_delete(i);
   }

@@ -11,7 +11,6 @@ static void garbage_collection()
 
 static void start_process_item(uint8_t num, uint8_t max)
 {
-  DEBUG("Free Heap (%d)", heap_bytes_free());
   s_record = malloc(sizeof(Record));
   pers_read_single(num, s_record);
 
@@ -27,7 +26,6 @@ static void start_process_item(uint8_t num, uint8_t max)
 
 static void on_finish_record(uint8_t feedback, void *data)
 {
-  DEBUG("Free Heap (%d)", heap_bytes_free());
   CurrentRecord *current = (CurrentRecord *)data;
 
   DEBUG_RECORD(*current->record);
@@ -36,7 +34,7 @@ static void on_finish_record(uint8_t feedback, void *data)
   current->record->stop = time(NULL);
 
   pers_write(*current->record, current->num);
-  //dlog_log(*current->record);
+  dlog_log(*current->record);
 
   uint8_t num = current->num + 1;
   uint8_t max = current->max;
@@ -44,7 +42,7 @@ static void on_finish_record(uint8_t feedback, void *data)
 
   if (num == max)
   {
-    //dlog_deinit();
+    dlog_deinit();
     show_last_window();
     return;
   }
@@ -53,19 +51,16 @@ static void on_finish_record(uint8_t feedback, void *data)
 
 static void on_start_process(void *data)
 {
-  DEBUG("Free Heap (%d)", heap_bytes_free());
   uint8_t max = pers_read_max_records();
   if (max > 0)
   {
-    //dlog_init();
-
+    dlog_init();
     start_process_item(0, max);
   }
 }
 
 static void on_show_text1(void *data)
 {
-  DEBUG("Free Heap (%d)", heap_bytes_free());
   CurrentRecord *current = (CurrentRecord *)data;
 
   DEBUG_RECORD(*current->record);
@@ -83,7 +78,6 @@ static void on_show_text1(void *data)
 
 static void on_show_text2(void *data)
 {
-  DEBUG("Free Heap (%d)", heap_bytes_free());
   CurrentRecord *current = (CurrentRecord *)data;
 
   DEBUG_RECORD(*current->record);
@@ -101,7 +95,6 @@ static void on_show_text2(void *data)
 
 static void on_show_feedback(void *data)
 {
-  DEBUG("Free Heap (%d)", heap_bytes_free());
   CurrentRecord *current = (CurrentRecord *)data;
 
   DEBUG_RECORD(*current->record);
@@ -123,9 +116,6 @@ static void on_show_feedback(void *data)
 
 static void show_first_window()
 {
-  DEBUG("Free Heap (%d)", heap_bytes_free());
-  DEBUG("show_first_window");
-
   InfoConfig c;
 
   uint8_t max_records = pers_read_max_records();
@@ -149,9 +139,6 @@ static void show_first_window()
 
 static void show_last_window()
 {
-  DEBUG("Free Heap (%d)", heap_bytes_free());
-  DEBUG("show_last_window");
-
   InfoConfig c;
 
   uint8_t max_records = pers_read_max_records();
@@ -167,12 +154,17 @@ static void show_last_window()
   info_window_init(c);
 }
 
-static void on_download_success(Record *records, uint8_t max_records)
+static void download_success(Record *records, uint8_t max_records)
 {
-  DEBUG("Free Heap (%d)", heap_bytes_free());
+  int records_size = 0;
   for (int i = 0; i < max_records; i++)
   {
-    pers_write(records[i], i);
+    int status_code = pers_write(records[i], i);
+    if (status_code <= 0){
+      DEBUG("Persistend write error. Could only store %d items", i);
+      max_records = i;
+      break;
+    }
   }
   download_deinit();
 
@@ -181,7 +173,7 @@ static void on_download_success(Record *records, uint8_t max_records)
   show_first_window();
 }
 
-static void on_download_fail(char msg[MAX_TEXT_LEN])
+static void download_fail(char msg[MAX_TEXT_LEN])
 {
   info_window_set_main("Download failed. Please try 'pebble_upload.py' again or press select for demo mode");
 
@@ -197,7 +189,7 @@ static void init()
 
   if (appLaunchReason == APP_LAUNCH_PHONE)
   {
-    download_init(on_download_success, on_download_fail);
+    download_init(download_success, download_fail);
     // If app was launched by phone and close to last app is disabled, always exit to the watchface instead of to the menu
     exit_reason_set(APP_EXIT_ACTION_PERFORMED_SUCCESSFULLY);
   }
@@ -205,7 +197,7 @@ static void init()
 
 static void deinit()
 {
-  //dlog_deinit();
+  dlog_deinit();
   garbage_collection();
 }
 

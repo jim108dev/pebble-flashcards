@@ -4,16 +4,15 @@
  Read feedback from a csv file. Integrate it in the current findings. Delete the file.
 """
 
-import os.path
+import datetime
 
 import pandas as pd
-from pandas.core.dtypes.missing import isna
 
 from util import get_conf
 
 OUTPUT_COLUMNS = ["id","feedback_history","start_history","stop_history"]
 
-NOW = (date.today() - datetime.datetime(1970,1,1)).total_seconds()
+NOW = (datetime.datetime.now() - datetime.datetime(1970,1,1)).total_seconds()
 
 def main(conf):
     ref_df = pd.read_csv(conf.reference_filename, sep=';')

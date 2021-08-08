@@ -48,7 +48,7 @@ static void inbox_received_handler(DictionaryIterator *iter, void *context)
     s_max_records = packet_get_uint8(iter, DOWNLOAD_KEY_MAX);
     s_records = malloc(sizeof(Record) * s_max_records);
 
-    DEBUG("Max records (%d) received", s_max_records);
+    DEBUG("Max records (%d) received.",s_max_records);
     return;
   }
 
