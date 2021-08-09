@@ -17,16 +17,16 @@ This is a learning project in order to create a simple Pebble app. It displays (
 1. Install repository 's software
 
     ```sh
-      git clone https://github.com/jim108dev/pebble-flashcards.git
+    git clone https://github.com/jim108dev/pebble-flashcards.git
     ```
 
 1. Create a Python 3 environment
 
     ```sh
-      virtualenv --python=/usr/bin/python3.7 venv
-      bash
-      source venv/bin/activate
-      pip install -r requirements.txt
+    virtualenv --python=/usr/bin/python3.7 venv
+    bash
+    source venv/bin/activate
+    pip install -r requirements.txt
     ```
 
 1. Set custom questions and and answers in `reference.csv`.
