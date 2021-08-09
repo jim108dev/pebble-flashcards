@@ -16,43 +16,43 @@ This is a learning project in order to create a simple Pebble app. It displays (
 
 1. Install repository 's software
 
-  ```sh
-    git clone https://github.com/jim108dev/pebble-flashcards.git
-  ```
+    ```sh
+      git clone https://github.com/jim108dev/pebble-flashcards.git
+    ```
 
 1. Create a Python 3 environment
 
-  ```sh
-    virtualenv --python=/usr/bin/python3.7 venv
-    bash
-    source venv/bin/activate
-    pip install -r requirements.txt
-  ```
+    ```sh
+      virtualenv --python=/usr/bin/python3.7 venv
+      bash
+      source venv/bin/activate
+      pip install -r requirements.txt
+    ```
 
 1. Set custom questions and and answers in `reference.csv`.
 
 1. Align the history file
 
-  ```sh
-  # with venv environment
-  cd evaluation
-  python align_history.py config.ini
-  ```
+    ```sh
+    # with venv environment
+    cd evaluation
+    python align_history.py config.ini
+    ```
   
 1. Install on the emulator
 
-  ```sh
-  cd pebble_app
-  pebble build && pebble install --logs --emulator aplite
-  ```
+    ```sh
+    cd pebble_app
+    pebble build && pebble install --logs --emulator aplite
+    ```
 
 1. Install on the device
 
-  ```sh
-  # Pair the device before
-  cd pebble_app
-  pebble build && pebble install --serial /dev/rfcomm0
-  ```
+    ```sh
+    # Pair the device before
+    cd pebble_app
+    pebble build && pebble install --serial /dev/rfcomm0
+    ```
 
 ## Usage
 
