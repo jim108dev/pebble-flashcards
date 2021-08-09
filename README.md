@@ -52,6 +52,7 @@ This is a learning project in order to create a simple Pebble app. It displays (
   # Pair the device before
   cd pebble_app
   pebble build && pebble install --serial /dev/rfcomm0
+  ```
 
 ## Usage
 
