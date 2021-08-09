@@ -5,7 +5,6 @@ This is a learning project in order to create a simple Pebble app. It displays (
 ## Screenshots
 
 ![download_failed](./screenshots/no_data.png)
-![continue_session](./screenshots/continue_session.png)
 ![question](./screenshots/question.png)
 ![answer](./screenshots/answer.png)
 ![feedback](./screenshots/feedback.png)
