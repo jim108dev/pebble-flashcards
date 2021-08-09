@@ -60,39 +60,39 @@ All the steps can also be done with the emulator for testing and inspect debug m
 
 1. Create `upload.csv`
 
-  ```sh
-  cd evaluation
-  # With Python 3.7 env
-  python prepare_next_session.py config.ini
-  ```
+    ```sh
+    cd evaluation
+    # With Python 3.7 env
+    python prepare_next_session.py config.ini
+    ```
 
 1. Run the pebble app/ activate bluetooth
   
 1. Upload the csv file
 
-  ```sh
-  cd connection
-  # Alter the path to pebble-pc-template accordingly
-  # With Python 2.7 env
-  python ~/github/pebble-pc-communication-example/host_python/pebble_upload.py config_watch.ini
-  # Or for the emulator
-  python ~/github/pebble-pc-communication-example/host_python/pebble_upload.py config_emu.ini
-  ```
+    ```sh
+    cd connection
+    # Alter the path to pebble-pc-template accordingly
+    # With Python 2.7 env
+    python ~/github/pebble-pc-communication-example/host_python/pebble_upload.py config_watch.ini
+    # Or for the emulator
+    python ~/github/pebble-pc-communication-example/host_python/pebble_upload.py config_emu.ini
+    ```
 
 1. Gather feedback on the watch
 1. Download
 
-  ```sh
-  python ~/github/pebble-pc-communication-example/host_python/pebble_download.py config_watch.ini
-  ```
+    ```sh
+    python ~/github/pebble-pc-communication-example/host_python/pebble_download.py config_watch.ini
+    ```
 
 1. Merge feedback
 
-  ```sh
-  cd evaluation
-  # With Python 3.7 env
-  python merge_feedback.py config.ini
-  ```
+    ```sh
+    cd evaluation
+    # With Python 3.7 env
+    python merge_feedback.py config.ini
+    ```
 
 ## Limitations
 
