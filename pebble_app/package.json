@@ -11,7 +11,7 @@
     "pebble-packet": "^1.3.2"
   },
   "pebble": {
-    "displayName": "pebble-flashcards",
+    "displayName": "Flashcards",
     "uuid": "8cca622c-efcd-4d21-bf03-4f6b325185e6",
     "sdkVersion": "3",
     "enableMultiJS": true,
