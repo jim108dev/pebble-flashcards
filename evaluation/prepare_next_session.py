@@ -4,6 +4,7 @@
  Create a new file for the next session based on the history.
 """
 
+import logging
 from datetime import date
 
 import pandas as pd
@@ -11,6 +12,8 @@ from pandas.core.dtypes.missing import isna
 
 from algo_sm2 import supermemo_2
 from util import get_conf
+
+logging.basicConfig(level=logging.DEBUG)
 
 OUTPUT_COLUMNS = ["id", "text1", "text2", "feedback","start", "stop"]
 
@@ -43,7 +46,7 @@ def main(conf):
     df['start'] = 0
     df['stop'] = 0
 
-    print(df.head())
+    logging.debug(df.head())
 
     df.to_csv(path_or_buf=conf.next_session_filename, columns=OUTPUT_COLUMNS, index=False, sep=";")
 

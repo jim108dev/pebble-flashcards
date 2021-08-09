@@ -5,11 +5,14 @@
 """
 
 import datetime
+import logging
 import os
 
 import pandas as pd
 
 from util import get_conf
+
+logging.basicConfig(level=logging.DEBUG)
 
 HISTORY_COLUMNS = ["id", "feedback_history", "start_history", "stop_history"]
 
@@ -23,6 +26,8 @@ def main(conf):
         conf.history_filename) else pd.read_csv(conf.history_filename, sep=';')
 
     df = ref_df.merge(history_df, on='id', how="left")
+
+    logging.debug(df.head())
 
     df.to_csv(path_or_buf=conf.history_filename,
               columns=HISTORY_COLUMNS, index=False, sep=";")

@@ -6,7 +6,7 @@ def supermemo_2(x: List[int], a=6.0, b=-0.8, c=0.28, d=0.02, assumed_score=2.5, 
     """
     Returns the number of days until seeing a problem again based on the 
     history of answers x to the problem, where the meaning of x is:
-    x == 0: Again
+    x == 0: Incomprehensible
     x == 1: Hard
     x == 2: Good
     x == 3: Easy

@@ -98,12 +98,13 @@ static void on_show_feedback(void *data)
   MenuConfig *c = malloc(sizeof(MenuConfig));
   c->action = on_finish_record;
   c->extra = current;
-  strcpy(c->labels[0], "Again");
+  strcpy(c->labels[0], "Incomprehensible");
   strcpy(c->labels[1], "Hard");
   strcpy(c->labels[2], "Good");
   strcpy(c->labels[3], "Easy");
+  strcpy(c->labels[4], "Bury");
 
-  c->max_items = 4;
+  c->max_items = 5;
   c->selected = current->record->feedback;
 
   menu_window_init(c);
