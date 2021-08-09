@@ -20,8 +20,8 @@ typedef void (*DownloadFailCallback)(char message[MAX_TEXT_LEN]);
 
 typedef struct CurrentRecord
 {
-    uint8_t num;
-    uint8_t max;
+    uint8_t num_seen;
+    uint8_t max_records;
     Record *record;
 
 } CurrentRecord;

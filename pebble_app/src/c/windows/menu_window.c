@@ -4,8 +4,6 @@
 static Window *s_window = NULL;
 static MenuLayer *s_menu_layer;
 static MenuConfig *s_config;
-static TextLayer *s_head_left_layer;
-;
 
 static uint16_t get_num_rows_callback(MenuLayer *menu_layer, uint16_t section_index, void *context)
 {
@@ -27,12 +25,28 @@ static void select_callback(struct MenuLayer *menu_layer, MenuIndex *cell_index,
     s_config->action(cell_index->row, s_config->extra);
 }
 
+void invert_colors(MenuLayer *layer)
+{
+    GColor white = GColorWhite;
+    GColor black = GColorBlack;
+
+    menu_layer_set_normal_colors(layer, black, white);
+    menu_layer_set_highlight_colors(layer, white, black);
+}
+
 static void window_load(Window *window)
 {
     Layer *window_layer = window_get_root_layer(window);
     GRect bounds = layer_get_bounds(window_layer);
 
     s_menu_layer = menu_layer_create(bounds);
+
+    if (DARK_BACKGROUND)
+    {
+        invert_colors(s_menu_layer);
+    }
+    menu_layer_pad_bottom_enable(s_menu_layer, false);
+
     menu_layer_set_click_config_onto_window(s_menu_layer, window);
     menu_layer_set_callbacks(s_menu_layer, NULL, (MenuLayerCallbacks){
                                                      .get_num_rows = get_num_rows_callback,
@@ -40,13 +54,13 @@ static void window_load(Window *window)
                                                      .get_cell_height = get_cell_height_callback,
                                                      .select_click = select_callback,
                                                  });
+
     layer_add_child(window_layer, menu_layer_get_layer(s_menu_layer));
     menu_layer_set_selected_index(s_menu_layer, (MenuIndex){.section = 0, .row = s_config->selected}, MenuRowAlignCenter, false);
 }
 
 static void window_unload(Window *window)
 {
-    text_layer_destroy(s_head_left_layer);
     menu_layer_destroy(s_menu_layer);
 }
 

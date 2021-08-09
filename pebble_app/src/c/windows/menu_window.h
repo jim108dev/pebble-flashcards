@@ -3,6 +3,7 @@
 #include <pebble.h>
 #include "../modules/util.h"
 
+#define DARK_BACKGROUND true
 typedef void(ActionCallback)(uint8_t feedback, void *data);
 
 typedef struct MenuConfig

@@ -4,8 +4,10 @@
 #include "../modules/types.h"
 #include "../modules/util.h"
 
-#define PADDING 5
+#define PADDING 0
 #define HEAD_HEIGHT 20
+#define DARK_BACKGROUND true
+
 typedef void(DoneCallback)(void *data);
 
 typedef struct InfoConfig

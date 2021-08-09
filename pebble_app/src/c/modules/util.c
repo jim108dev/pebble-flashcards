@@ -8,7 +8,7 @@ void record_to_string(char buf[MAX_TEXT_LEN], Record r)
     char time_buf2[MAX_TEXT_LEN];
     time_to_string(time_buf2, r.stop);
     
-    snprintf(buf, MAX_TEXT_LEN, "Record ('%s';'%.5s...';'%.5s...';%d,%ld,%ld)", r.id, r.text1, r.text2, r.feedback, r.start, r.stop);
+    snprintf(buf, MAX_TEXT_LEN, "Record ('%s';'%.5s...';'%.5s...';%d;%ld;%ld)", r.id, r.text1, r.text2, r.feedback, r.start, r.stop);
 }
 
 void time_to_string(char buf[MAX_TEXT_LEN], time_t rawtime)
@@ -41,4 +41,9 @@ char *small_textcpy(char * dest, const char * src){
     strncpy(dest, src, MAX_SMALL_TEXT_LEN);
     dest[MAX_SMALL_TEXT_LEN-1] = '\0';
     return dest;
+}
+
+void sprint_progress(char text[MAX_SMALL_TEXT_LEN], uint8_t num, uint8_t max)
+{
+  snprintf(text, MAX_SMALL_TEXT_LEN, "%d/%d", num, max);
 }

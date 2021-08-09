@@ -2,6 +2,15 @@
 
 This is a learning project in order to create a simple Pebble app. It displays (text-based) flashcards and collects interactive feedback. The feedback is evaluated with python and a new set of questions is prepared.
 
+## Screenshots
+
+![download_failed](./screenshots/download_failed.png)
+![continue_session](./screenshots/continue_session.png)
+![question](./screenshots/question.png)
+![answer](./screenshots/answer.png)
+![feedback](./screenshots/feedback.png)
+![last_page](./screenshots/last_page.png)
+
 ## Install
 
 1. Install [pebble-pc-communication-example](https://github.com/jim108dev/pebble-pc-communication-example).
@@ -28,7 +37,7 @@ This is a learning project in order to create a simple Pebble app. It displays (
   ```sh
   # with venv environment
   cd evaluation
-  python algin_history.py config.ini
+  python align_history.py config.ini
   ```
   
 1. Install on the emulator
@@ -62,9 +71,12 @@ All the steps can also be done with the emulator for testing and inspect debug m
 1. Upload the csv file
 
   ```sh
+  cd connection
   # Alter the path to pebble-pc-template accordingly
   # With Python 2.7 env
   python ~/github/pebble-pc-communication-example/host_python/pebble_upload.py config_watch.ini
+  # Or for the emulator
+  python ~/github/pebble-pc-communication-example/host_python/pebble_upload.py config_emu.ini
   ```
 
 1. Gather feedback on the watch

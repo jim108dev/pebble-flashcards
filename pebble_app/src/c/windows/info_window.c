@@ -19,24 +19,32 @@ void click_provider(void *context)
   window_single_click_subscribe(BUTTON_ID_DOWN, click_handler);
 }
 
+static void invert_colors(TextLayer *layer)
+{
+  GColor front = GColorWhite;
+  GColor back = GColorBlack;
+  text_layer_set_background_color(layer, back);
+  text_layer_set_text_color(layer, front);
+}
+
 void window_load(Window *window)
 {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
 
-  s_head_left_layer = text_layer_create(GRect(PADDING, 0, bounds.size.w/2-PADDING, HEAD_HEIGHT));
+  s_head_left_layer = text_layer_create(GRect(PADDING, 0, bounds.size.w / 2, HEAD_HEIGHT));
 
   text_layer_set_text(s_head_left_layer, s_config->head_left);
   text_layer_set_text_alignment(s_head_left_layer, GTextAlignmentLeft);
   layer_add_child(window_layer, text_layer_get_layer(s_head_left_layer));
 
-  s_head_right_layer = text_layer_create(GRect(bounds.size.w/2, 0, bounds.size.w/2-PADDING, HEAD_HEIGHT));
+  s_head_right_layer = text_layer_create(GRect(bounds.size.w / 2, 0, bounds.size.w / 2, HEAD_HEIGHT));
 
   text_layer_set_text(s_head_right_layer, s_config->head_right);
   text_layer_set_text_alignment(s_head_right_layer, GTextAlignmentRight);
   layer_add_child(window_layer, text_layer_get_layer(s_head_right_layer));
 
-  GRect max_text_bounds = GRect(PADDING, HEAD_HEIGHT, bounds.size.w-PADDING, bounds.size.h);
+  GRect max_text_bounds = GRect(PADDING, HEAD_HEIGHT, bounds.size.w - PADDING, bounds.size.h);
   s_main_layer = text_layer_create(max_text_bounds);
   text_layer_set_font(s_main_layer, fonts_get_system_font(FONT_KEY_ROBOTO_CONDENSED_21));
   text_layer_set_text(s_main_layer, s_config->main);
@@ -45,6 +53,13 @@ void window_load(Window *window)
   GSize max_size = GSize(max_text_bounds.size.w - max_text_bounds.origin.x, max_text_bounds.size.h - max_text_bounds.origin.y);
   text_layer_set_size(s_main_layer, max_size);
   layer_add_child(window_layer, text_layer_get_layer(s_main_layer));
+
+  if (DARK_BACKGROUND)
+  {
+    invert_colors(s_head_left_layer);
+    invert_colors(s_head_right_layer);
+    invert_colors(s_main_layer);
+  }
 }
 
 void info_window_set_head_left(char text[MAX_TEXT_LEN])
@@ -87,7 +102,10 @@ void info_window_init(InfoConfig *config)
   s_window = window_create();
   s_config = config;
 
-  window_set_click_config_provider(s_window, click_provider);
+  if (config->action != NULL)
+  {
+    window_set_click_config_provider(s_window, click_provider);
+  }
   window_set_window_handlers(s_window, (WindowHandlers){
                                            .load = window_load,
                                            .unload = window_unload,

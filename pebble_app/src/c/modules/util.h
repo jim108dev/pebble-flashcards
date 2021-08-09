@@ -30,3 +30,4 @@ void record_to_string(char buf[MAX_TEXT_LEN], Record r);
 
 char *textcpy(char * dest, const char * src);
 char *small_textcpy(char * dest, const char * src);
+void sprint_progress(char text[MAX_SMALL_TEXT_LEN], uint8_t num, uint8_t max);
