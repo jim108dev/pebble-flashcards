@@ -32,7 +32,7 @@ This is a learning project in order to create a simple Pebble app. It displays (
     exit
     ```
 
-1. Adjust path in `Makefile` accordingly.
+1. Adjust paths in `Makefile` accordingly.
 
 1. Set custom questions and and answers in `reference.csv`.
 
