@@ -29,6 +29,7 @@ This is a learning project in order to create a simple Pebble app. It displays (
     source venv/bin/activate
     pip install -r requirements.txt
     deactivate
+    exit
     ```
 
 1. Adjust path in `Makefile` accordingly.
