@@ -5,7 +5,6 @@ static TextLayer *s_main_layer;
 static TextLayer *s_head_left_layer;
 static TextLayer *s_head_right_layer;
 static InfoConfig *s_config;
-static char buf[30];
 
 void click_handler(ClickRecognizerRef recognizer, void *context)
 {
