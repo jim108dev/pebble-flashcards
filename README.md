@@ -23,10 +23,12 @@ This is a learning project in order to create a simple Pebble app. It displays (
 1. Create a Python 3 environment
 
     ```sh
+    cd evaluation/
     virtualenv --python=/usr/bin/python3.7 venv
     bash
     source venv/bin/activate
     pip install -r requirements.txt
+    deactivate
     ```
 
 1. Set custom questions and and answers in `reference.csv`.
@@ -34,65 +36,46 @@ This is a learning project in order to create a simple Pebble app. It displays (
 1. Align the history file
 
     ```sh
-    # with venv environment
-    cd evaluation
-    python align_history.py config.ini
-    ```
-  
-1. Install on the emulator
-
-    ```sh
-    cd pebble_app
-    pebble build && pebble install --logs --emulator aplite
-    ```
-
-1. Install on the device
-
-    ```sh
-    # Pair the device before
-    cd pebble_app
-    pebble build && pebble install --serial /dev/rfcomm0
+    make align_history
     ```
 
 ## Usage
 
-All the steps can also be done with the emulator for testing and inspect debug messages. Just use `config_emu.ini`.
+### On the Emulator
 
-1. Create `upload.csv`
+```sh
+# Create `upload.csv`
+make prepare_next_session
 
-    ```sh
-    cd evaluation
-    # With Python 3.7 env
-    python prepare_next_session.py config.ini
-    ```
+make start_emu
 
-1. Run the pebble app/ activate bluetooth
-  
-1. Upload the csv file
+make upload_emu
 
-    ```sh
-    cd connection
-    # Alter the path to pebble-pc-template accordingly
-    # With Python 2.7 env
-    python ~/github/pebble-pc-communication-example/host_python/pebble_upload.py config_watch.ini
-    # Or for the emulator
-    python ~/github/pebble-pc-communication-example/host_python/pebble_upload.py config_emu.ini
-    ```
+# Gather feedback on the device
 
-1. Gather feedback on the watch
-1. Download
+make download_emu
 
-    ```sh
-    python ~/github/pebble-pc-communication-example/host_python/pebble_download.py config_watch.ini
-    ```
+# Merge current feedback with history
+make merge_feedback
+```
 
-1. Merge feedback
+### On the Watch
 
-    ```sh
-    cd evaluation
-    # With Python 3.7 env
-    python merge_feedback.py config.ini
-    ```
+```sh
+# Create `upload.csv`
+make prepare_next_session
+
+make start_watch
+
+make upload_watch
+
+# Gather feedback on the device
+
+make download_watch
+
+# Merge current feedback with history
+make merge_feedback
+```
 
 ## Limitations
 

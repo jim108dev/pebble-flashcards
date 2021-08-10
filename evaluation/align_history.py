@@ -14,7 +14,7 @@ from util import get_conf
 
 logging.basicConfig(level=logging.DEBUG)
 
-HISTORY_COLUMNS = ["id", "feedback_history", "start_history", "stop_history"]
+HISTORY_COLUMNS = ["id", "feedback_history", "start_history", "stop_history", "buried"]
 
 NOW = (datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds()
 
