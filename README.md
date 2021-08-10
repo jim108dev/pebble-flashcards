@@ -1,6 +1,8 @@
 # Pebble Flashcards
 
-This is a learning project in order to create a simple Pebble app. It displays (text-based) flashcards and collects interactive feedback. The feedback is evaluated with python and a new set of questions is prepared.
+This is a learning project in order to create a simple Pebble app, which displays (text-based) flashcards and collects interactive feedback. The feedback is evaluated with python and a new set of questions is prepared.
+
+The Pebble app works without a smartphone. The data is exchanged with a pc. Necessary functions for this exchange can be found in [pebble-pc-communication-example](https://github.com/jim108dev/pebble-pc-communication-example).
 
 ## Screenshots
 
