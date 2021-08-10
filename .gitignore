@@ -61,3 +61,10 @@ target/
 pebble_app/build/
 
 venv/
+build
+node_modules
+
+data/log.csv
+data/upload.csv
+data/reference.csv
+data/download.csv
