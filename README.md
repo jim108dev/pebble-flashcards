@@ -36,7 +36,7 @@ The Pebble app works without a smartphone. The data is exchanged with a pc. Nece
 
 1. Adjust paths in `Makefile` accordingly.
 
-1. Set custom questions and and answers in `reference.csv`.
+1. Save questions and and answers in `data/reference.csv`. An example is given in `data/reference.example.csv`.
 
 1. Align the history file
 
