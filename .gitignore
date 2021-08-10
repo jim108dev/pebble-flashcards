@@ -61,6 +61,5 @@ target/
 pebble_app/build/
 
 venv/
-data/history.csv
-data/download.csv
-data/upload.csv
+build/
+node_modules
