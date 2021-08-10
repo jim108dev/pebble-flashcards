@@ -61,5 +61,3 @@ target/
 pebble_app/build/
 
 venv/
-build/
-node_modules
