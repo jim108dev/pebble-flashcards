@@ -13,13 +13,13 @@ void record_to_string(char buf[MAX_TEXT_LEN], Record r)
 
 void time_to_string(char buf[MAX_TEXT_LEN], time_t rawtime)
 {
-   struct tm *info;
+    struct tm *info;
 
-   time( &rawtime );
+    time(&rawtime);
 
-   info = localtime( &rawtime );
+    info = localtime(&rawtime);
 
-   strftime(buf,MAX_TEXT_LEN,"%x - %I:%M%p", info);
+    strftime(buf, MAX_TEXT_LEN, "%x - %I:%M%p", info);
 }
 
 uint8_t packet_get_uint8(DictionaryIterator *inbox_iter, int key)
@@ -31,19 +31,37 @@ uint8_t packet_get_uint8(DictionaryIterator *inbox_iter, int key)
     return dict_find(inbox_iter, key)->value->uint8;
 }
 
-char *textcpy(char * dest, const char * src){
-    strncpy(dest, src, MAX_TEXT_LEN);
-    dest[MAX_TEXT_LEN-1] = '\0';
-    return dest;
-}
-
-char *small_textcpy(char * dest, const char * src){
-    strncpy(dest, src, MAX_SMALL_TEXT_LEN);
-    dest[MAX_SMALL_TEXT_LEN-1] = '\0';
-    return dest;
-}
-
-void sprint_progress(char text[MAX_SMALL_TEXT_LEN], uint8_t num, uint8_t max)
+int textcpy(char *dest, const char *src)
 {
-  snprintf(text, MAX_SMALL_TEXT_LEN, "%d/%d", num, max);
+    return snprintf(dest, MAX_SMALL_TEXT_LEN, "%s", src);
+}
+
+int small_textcpy(char *dest, const char *src)
+{
+    return snprintf(dest, MAX_TEXT_LEN, "%s", src);
+}
+
+int sprint_progress(char text[MAX_SMALL_TEXT_LEN], uint8_t num, uint8_t max)
+{
+    return snprintf(text, MAX_SMALL_TEXT_LEN, "%d/%d", num, max);
+}
+
+
+bool ll_free_callback(void *object, void *context){
+  FREE_SAFE(object);
+  return true;
+}
+
+int dp_fill_text(char *dest, ProcessingState* state){
+    char *buf = data_processor_get_string(state);
+    int n = textcpy(dest, buf);
+    free(buf);
+    return n;
+}
+
+int dp_fill_small_text(char *dest, ProcessingState* state){
+    char *buf = data_processor_get_string(state);
+    int n = small_textcpy(dest, buf);
+    free(buf);
+    return n;
 }

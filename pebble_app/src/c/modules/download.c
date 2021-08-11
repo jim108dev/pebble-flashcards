@@ -29,7 +29,7 @@ static void inbox_received_handler(DictionaryIterator *iter, void *context)
 
   if (packet_contains_key(iter, DOWNLOAD_KEY_MAX))
   {
-    s_max_records = packet_get_uint8(iter, DOWNLOAD_KEY_MAX);
+    s_max_records = packet_get_integer(iter, DOWNLOAD_KEY_MAX);
     s_records = malloc(sizeof(Record) * s_max_records);
 
     DEBUG("Max records (%d) received.",s_max_records);
@@ -49,9 +49,10 @@ static void inbox_received_handler(DictionaryIterator *iter, void *context)
     ProcessingState *state = data_processor_create(data, ';');
 
     Record r;
-    small_textcpy(r.id, data_processor_get_string(state));
-    textcpy(r.text1, data_processor_get_string(state));
-    textcpy(r.text2, data_processor_get_string(state));
+    dp_fill_small_text(r.id, state);
+    dp_fill_text(r.text1, state);
+    dp_fill_text(r.text2, state);
+
     r.feedback = data_processor_get_int(state);
     r.start = data_processor_get_int(state);
     r.stop = data_processor_get_int(state);
