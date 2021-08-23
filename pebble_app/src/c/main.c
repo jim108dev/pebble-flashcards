@@ -147,9 +147,19 @@ static void show_first_window()
 
   if (num_seen < max_records)
   {
+    sprint_progress(c->head_right, num_seen, max_records);
     snprintf(c->main, sizeof(c->main), "Only %d questions to go. Press 'select' to start.", max_records - num_seen);
     c->action = on_start_process;
     info_window_init(c);
+  }
+
+  if (num_seen == max_records)
+  {
+    sprint_progress(c->head_right, num_seen, max_records);
+    strcpy(c->main, "All questions answered. Please run 'pebble_upload.py'.");
+    c->action = NULL;
+    info_window_init(c);
+    return;
   }
 }
 

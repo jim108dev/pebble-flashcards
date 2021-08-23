@@ -29,6 +29,8 @@ def main(conf):
 
     logging.debug(df.head())
 
+    df['buried'] = False
+
     df.to_csv(path_or_buf=conf.history_filename,
               columns=HISTORY_COLUMNS, index=False, sep=";")
 

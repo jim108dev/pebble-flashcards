@@ -31,13 +31,13 @@ void window_load(Window *window)
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
 
-  s_head_left_layer = text_layer_create(GRect(PADDING, 0, bounds.size.w / 2, HEAD_HEIGHT));
+  s_head_left_layer = text_layer_create(GRect(PADDING, 0, bounds.size.w * 2/2, HEAD_HEIGHT));
 
   text_layer_set_text(s_head_left_layer, s_config->head_left);
   text_layer_set_text_alignment(s_head_left_layer, GTextAlignmentLeft);
   layer_add_child(window_layer, text_layer_get_layer(s_head_left_layer));
 
-  s_head_right_layer = text_layer_create(GRect(bounds.size.w / 2, 0, bounds.size.w / 2, HEAD_HEIGHT));
+  s_head_right_layer = text_layer_create(GRect(bounds.size.w * 2/3, 0, bounds.size.w * 1/3, HEAD_HEIGHT));
 
   text_layer_set_text(s_head_right_layer, s_config->head_right);
   text_layer_set_text_alignment(s_head_right_layer, GTextAlignmentRight);

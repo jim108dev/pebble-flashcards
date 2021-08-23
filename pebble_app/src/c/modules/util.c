@@ -33,12 +33,12 @@ uint8_t packet_get_uint8(DictionaryIterator *inbox_iter, int key)
 
 int textcpy(char *dest, const char *src)
 {
-    return snprintf(dest, MAX_SMALL_TEXT_LEN, "%s", src);
+    return snprintf(dest, MAX_TEXT_LEN, "%s", src);
 }
 
 int small_textcpy(char *dest, const char *src)
 {
-    return snprintf(dest, MAX_TEXT_LEN, "%s", src);
+    return snprintf(dest, MAX_SMALL_TEXT_LEN, "%s", src);
 }
 
 int sprint_progress(char text[MAX_SMALL_TEXT_LEN], uint8_t num, uint8_t max)

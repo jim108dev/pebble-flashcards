@@ -4,6 +4,7 @@
 """
 
 import argparse
+import logging
 from configparser import ConfigParser
 
 
@@ -22,4 +23,5 @@ def get_conf():
     conf.next_session_filename = parser.get('next_session', 'filename')
     conf.max_records = parser.getint('next_session', 'max_records')
 
+    logging.basicConfig(level=parser.get('main', 'logging'))
     return conf

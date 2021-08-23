@@ -25,10 +25,10 @@ all:
 	@echo "Please choose explicitly a target."
 
 # Pebble
-start_emu:
+install_emu:
 	cd pebble_app && pebble build && pebble install --logs --emulator aplite
 
-start_watch:
+install_watch:
 	cd pebble_app && pebble build && pebble install --serial /dev/rfcomm0
 
 # Connection
