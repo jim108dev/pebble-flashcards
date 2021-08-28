@@ -38,10 +38,10 @@ def main(conf):
     df = pd.read_csv(conf.history_filename, sep=';')
 
     df['waiting_period'] = df['feedback_history'].apply(
-        lambda cs: 0 if isna(cs) else supermemo_2([int(v) for v in str(cs).split('|')]))
+        lambda cs: 0 if isna(cs) else supermemo_2([int(float(v)) for v in str(cs).split('|')]))
 
-    df['last_stop'] = df.apply(lambda x: pd.NA if isna(x['stop_history']) else x['stop_history'].split('|')[-1], axis=1)
-    df['last_start'] = df.apply(lambda x: pd.NA if isna(x['start_history']) else x['start_history'].split('|')[-1], axis=1)
+    df['last_stop'] = df.apply(lambda x: pd.NA if isna(x['stop_history']) else int(float(str(x['stop_history']).split('|')[-1])), axis=1)
+    df['last_start'] = df.apply(lambda x: pd.NA if isna(x['start_history']) else int(float(str(x['start_history']).split('|')[-1])), axis=1)
 
     df['countdown'] = df.apply(lambda x: 0 if isna(x['stop_history']) else countdown(x['last_stop'], x['waiting_period']), axis=1)
 
@@ -49,9 +49,9 @@ def main(conf):
 
     df = df[df['countdown'] <= 0]
 
-    df['duration'] = df.apply(lambda x: 0 if isna(x['last_start']) or isna(x['last_stop']) else df['stop'] - df['start'], axis=1)
+    df['duration'] = df.apply(lambda x: 0 if isna(x['last_start']) or isna(x['last_stop']) else df['last_stop'] - df['last_start'], axis=1)
 
-    df = df.sort_values(by=['duration'], ascending=False)
+    #df = df.sort_values(by=['duration'], ascending=False)
 
     df = df.nsmallest(conf.max_records, 'countdown')
 

@@ -21,14 +21,20 @@ PREPARE := $(PYTHON3) $(EVAL_PATH)/prepare_next_session.py
 MERGE := $(PYTHON3) $(EVAL_PATH)/merge_feedback.py
 EVAL_CONF := $(EVAL_PATH)/config.ini
 
+# pebble source
+PEBBLE_SRC := ./pebble_app
+
 all:
 	@echo "Please choose explicitly a target."
 
+init_app:
+	cp $(PEBBLE_SRC)/package.example.json $(PEBBLE_SRC)/package.json
+
 # Pebble
-install_emu:
+install_emu: init_app
 	cd pebble_app && pebble build && pebble install --logs --emulator aplite
 
-install_watch:
+install_watch: init_app
 	cd pebble_app && pebble build && pebble install --serial /dev/rfcomm0
 
 # Connection
