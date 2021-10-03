@@ -7,6 +7,7 @@
 import logging
 from datetime import date
 
+import numpy as np
 import pandas as pd
 from pandas.core.dtypes.missing import isna
 from pandas.core.frame import DataFrame
@@ -49,7 +50,7 @@ def main(conf):
 
     df = df[df['countdown'] <= 0]
 
-    df['duration'] = df.apply(lambda x: 0 if isna(x['last_start']) or isna(x['last_stop']) else df['last_stop'] - df['last_start'], axis=1)
+    df['duration'] = df.apply(lambda x: 0 if isna(x['last_start']) or isna(x['last_stop']) else x['last_stop'] - x['last_start'], axis=1)
 
     #df = df.sort_values(by=['duration'], ascending=False)
 
@@ -66,7 +67,7 @@ def main(conf):
     df['stop'] = 0
 
     #https://stackoverflow.com/questions/29576430/shuffle-dataframe-rows
-    df = df.sample(frac=1).reset_index(drop=True)
+    df = df.sample(frac=1, replace=False).reset_index(drop=True)
 
     logging.debug(df.head())
 

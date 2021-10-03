@@ -21,6 +21,7 @@ PREPARE := $(PYTHON3) $(EVAL_PATH)/prepare_next_session.py
 MERGE := $(PYTHON3) $(EVAL_PATH)/merge_feedback.py
 EVAL_CONF := $(EVAL_PATH)/config.ini
 
+
 # pebble source
 PEBBLE_SRC := ./pebble_app
 

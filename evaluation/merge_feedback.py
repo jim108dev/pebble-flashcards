@@ -56,6 +56,7 @@ def main(conf):
     feedback_df["start"] = feedback_df["start"].astype(int).astype(str)
     feedback_df["stop"] = feedback_df["stop"].astype(int).astype(str)
     feedback_df["buried"] = feedback_df["feedback"] == 4
+    feedback_df["id"] = feedback_df["id"].astype(str)
 
     df = history_df.merge(feedback_df, on="id", how="left")
 
