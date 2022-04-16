@@ -38,6 +38,8 @@ def check_len(df:DataFrame):
 def main(conf):
     df = pd.read_csv(conf.history_filename, sep=';')
 
+    df = df[df['buried'] == False]
+    
     df['waiting_period'] = df['feedback_history'].apply(
         lambda cs: 0 if isna(cs) else supermemo_2([int(float(v)) for v in str(cs).split('|')]))
 
@@ -46,7 +48,6 @@ def main(conf):
 
     df['countdown'] = df.apply(lambda x: 0 if isna(x['stop_history']) else countdown(x['last_stop'], x['waiting_period']), axis=1)
 
-    df = df[df['buried'] == False]
 
     df = df[df['countdown'] <= 0]
 
