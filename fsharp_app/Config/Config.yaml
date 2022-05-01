@@ -1,0 +1,11 @@
+main:
+  logging: WARN
+history:
+  file: data/history.csv
+reference:
+  file: data/reference.csv
+feedback:
+  file: data/download.csv
+next_session:
+  file: data/upload.csv
+  max_records: 20

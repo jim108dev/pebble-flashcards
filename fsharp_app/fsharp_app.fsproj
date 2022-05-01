@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <TargetName>pepple-flashcards</TargetName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Source/Domain/DeedleUtil.fs" />
+    <Compile Include="Source/Domain/Types.fs" />
+    <Compile Include="Source/Domain/SuperMemo2.fs" />
+    <Compile Include="Source/Application/Storage.fs" />
+    <Compile Include="Source/Application/Types.fs" />
+    <Compile Include="Source/Application/Main.fs" />
+    <Compile Include="Source/Shell/Argument.fs" />
+    <Compile Include="Source/Shell/Main.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Argu" Version="6.1.1" />
+    <PackageReference Include="Deedle" Version="2.5.0" />
+    <PackageReference Include="FSharp.Configuration" Version="2.0.0" />
+    <PackageReference Include="FSharpPlus" Version="1.2.3" />
+  </ItemGroup>
+</Project>
