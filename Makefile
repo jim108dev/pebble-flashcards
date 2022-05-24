@@ -50,6 +50,9 @@ download_emu:
 download_watch:
 	$(DOWNLOAD) $(CONN_CONF_WATCH)
 
+translate_binary_emu:
+	$(TRANSLATE_BINARY) $(CONN_CONF_EMU)
+
 translate_binary_watch:
 	$(TRANSLATE_BINARY) $(CONN_CONF_WATCH)
 

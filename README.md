@@ -22,27 +22,9 @@ The Pebble app works without a smartphone. The data is exchanged with a pc. Nece
     git clone https://github.com/jim108dev/pebble-flashcards.git
     ```
 
-1. Create a Python 3 environment
-
-    ```sh
-    cd evaluation/
-    virtualenv --python=/usr/bin/python3.7 venv
-    bash
-    source venv/bin/activate
-    pip install -r requirements.txt
-    deactivate
-    exit
-    ```
-
 1. Adjust paths in `Makefile` accordingly.
 
-1. Save questions and and answers in `data/reference.csv`. An example is given in `data/reference.example.csv`.
-
-1. Align the history file
-
-    ```sh
-    make align_history
-    ```
+1. Save questions and and answers in `data/reference.csv`. An example is given in `data-example/reference.csv`.
 
 ## Usage
 
@@ -59,6 +41,7 @@ make upload_emu
 # Gather feedback on the device
 
 make download_emu
+make translate_binary_emu
 
 # Merge current feedback with history
 make merge_feedback
@@ -79,6 +62,7 @@ make upload_watch
 # Gather feedback on the device
 
 make download_watch
+make translate_binary_watch
 
 # Merge current feedback with history
 make merge_feedback

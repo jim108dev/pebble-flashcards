@@ -1,0 +1,114 @@
+id;text1;text2;source;tags
+N.1.1.3;How much force does a biceps exert at a 10 kg weight?;1050N;;gym
+N.1.2.2;What is the deceleration of an elevator stopping from 25m?;2m/s;;office
+N.1.2.3;What is the for acting on carton (0.5kg) on top of a plate (1kg) pushed with 9N;3N;;food
+N.1.3.2;How much force is needed to pull a 50kg block at 30 degrees (friction coeff 0.4);188N;University Physics;outside
+N.4.1;How many drivers in the US are texting right now?;500,000;Comfort,2020,p. 35;travel traffic
+N.4.2;How fast does a car has to go to match the KE of a truck?;;;traffic
+N.8.1;How much energy does Europe or the US need per year?;7.5^11W;Weinstein,2008,p. 219;energy
+N.8.1.1;What fraction of the US is needed to power it only with solar panels?;4x10^-3;Weinstein,2008,p. 225;energy area environment
+N.8.1.2;How much electrical power can a wind turbine generate?;3 MW;Weinstein,2008,p. 229;energy wind environment
+N.8.2;Carbon dioxide released by 1-GW coal-fired power plant?;2x10^10kg;Weinstein,2008,p. 254;air,environment
+N.8.3;How much fuel does a 1 GW nuclear power plant require in one year?;2x10^4 kg;Weinstein,2008,p. 237; energy environment
+N.A.1;How tall is a stack of a trillion one-dollar bills?;10^5 km;Weinstein,2012,p. 17;distance money
+N.A.2;How many kernels of popcorn are needed to fill a bedroom?;10^7;Weinstein,2012,p. 21;area inside
+N.B.1;What is the mass of the atmosphere?;4x10^18kg;Weinstein,2008,p. 245;air
+N.B.2;Carbon dioxide in kg of all US cars emitted per year?;9x10^11kg/year;Weinstein,2008,p. 261;air,environment
+N.B.4;How much carbon dioxide in kg does 1-km^2 new forest absorb per year?;6x10^7 kg;Weinstein,2008,p. 265;air,environment
+N.C.1;How much does each cigarette smoked shorten life expectancy?;6 min;Weinstein,2008,p. 281;health
+N.D.1;What is the price of a 36 Euro item without VAT;30 Euro;;money
+N.E.1;How long does it take to double 8000 euro at 10 percent interest rate;7.2 years;;money
+2;How many breaths does a human take in a lifetime?;3x10^8;Comfort,2020,p. 41;health
+3;How many heartbeats does a human heart take in a lifetime?;3x10^9;Comfort,2020,p. 43;health
+4;How many hours of sleep in a lifetime?;225,000;Comfort,2020,p. 43;health
+6;What is the surface area of a human being?;2 m^2;Comfort,2020,p. 51;health
+7;What is the volume of a human being?;8x10^-2 m^3;Comfort,2020,p. 53;health
+8;How many cells are in a human body?;8x10^13;Comfort,2020,p. 55;health
+9;How much energy does a human use to climb up one floor on stairs?;74 kJ;Comfort,2020,p. 58;energy staircase
+10;What is the metabolic rate of a human being?;150W;Comfort,2020,p. 61;energy health
+12;How much memory storage does a book require?;400 kbytes;Comfort,2020,p. 67;library pc
+14;What is the speed of reading?;170 words/min;Comfort,2020,p. 74;library
+16;What is the probability to get struck by a lightning?;3x10^-6;Comfort,2020,p. 81;outside
+17;How many doctors are there in the US?;10^5;Comfort,2020,p. 85;health
+18;How many patients can a doctor see per year?;8000;Comfort,2020,p. 88;health
+19;How long is the average wait at the doctor's office?;45 mins;Comfort,2020,p. 90;health waiting
+20;How many hospital beds are there in the US?;800,000;Comfort,2020,p. 96;health
+21;How long would it take to inoculate the US population?;57 days;Comfort,2020,p. 97;health
+22;If all the humans in the world were crammed together, how much area would it take?;10^9m^2;Weinstein,2008,p. 21;population area
+23;How many golf balls would it take to circle the earth?;10^9;Weinstein,2008,p. 25;earth distance
+24;What distance would all pickles sold in the US last year cover?;6x10^8;Weinstein,2008,p. 29;distance
+25;What is the surface area of a typical bath towel?;80 m^2;Weinstein,2008,p. 31;bath
+26;How long does it take to fill the dome of the Capitol building with water?;500 days;Weinstein,2008,p. 35;volume
+27;How much does a mole of cats weight?;5x10^24 kg;Weinstein,2008,p. 39;atom-weight
+28;How much trash is collected each year in the US?;3x10^8 m^3;Weinstein,2008,p. 43;trash
+29;How much space of all trash collected in one year in the US would take?;10^7 m^2;Weinstein,2008,p. 47;trash
+30;What is the total volume of human blood in the world?;3x10^10 L;Weinstein,2008,p. 61;health population
+31;What is the total length of all the hair on an average woman's head?;10 km;Weinstein,2008,p. 69;health
+32;How long a hot dog can be made from a typical cow?;2x10^3 m;Weinstein,2008,p. 73;animals
+33;How far does a soccer player travel during the course of a 90-minute game?;20 km;Weinstein,2008,p. 75;sports
+34;How many km do all Americans drive in one year? Compare circumference Earth?;10^8 times;Weinstein,2008,p. 89;trafic
+35;What volume of gasoline does a typical automobile use during its lifetime?;2x10^4 L;Weinstein,2008,p. 91;trafic
+36;How far does a car travel for one-molecule layer of rubber?;3 m;Weinstein,2008,p. 107;trafic
+37;Change your PE climbing a medium-sized mountain? Compare soda?;3 sodas;Weinstein,2008,p. 115;energy
+38;How much potential energy is stored in the Alps?;10^22 J;Weinstein,2008,p. 119;energy
+39;How much potential energy does a 100-story building have?;5x10^12 J;Weinstein,2008,p. 123;building energy
+40;What is the kinetic energy in joules of a served tennis ball?;100 J;Weinstein,2008,p. 127;sports energy
+41;What is the kinetic energy of a large truck at highway speed?;10^7 J;Weinstein,2008,p. 129;energy trafic
+42;What is the force exerted on the body at a crash of highway speed?;10^5 N;Weinstein,2008,p. 139;energy trafic
+43;How much chemical energy is stored in 1 L of gasoline?;4x10^7 J;Weinstein,2008,p. 147;energy trafic
+44;How much energy is stored in a common D-battery in joules per kg?;8x10^5 J;Weinstein,2008,p. 155;energy batteries
+45;How much joules does a human consume per year?;6x10^10 J;Weinstein,2008,p. 163;energy health
+46;At what rate is energy transfered to a car at a petrol station?;10 MW;Weinstein,2008,p. 173;energy trafic
+47;What is the kinetic energy of the Earth around the Sun?;3x10^35 J;Weinstein,2008,p. 181;energy earth
+48;What is the kinetic energy of 1-km meteorite when it hits the Earth?; 4x10^21 J;Weinstein,2008,p. 185;energy earth
+49;What is the radius of the Sun?;1.5x10^9 m;Weinstein,2008,p. 189;energy light
+50;What is the power output of the Sun?;4x10^26 W;Weinstein,2008,p. 193;energy light
+51;For how long could a chemical sun contiue to burn at its current power output?;10^4 years;Weinstein,2008,p. 201;light
+52;How much electrical energy does the US use per year?;3x10^19 J;Weinstein,2008,p. 219;energy
+53;How much solar energy reaches the Earth in one year?;4x10^24 J;Weinstein,2008,p. 123;energy light
+56;Fuel of 1 GW coal-fired power plant in 100-ton railroad cars per day?;1;Weinstein,2008,p. 233;energy environment
+64;What fraction of the Earth could we block with one trillion one-dollar bills?;10^-4;Weinstein,2012,p. 20;area earth money
+66;How much does 1 trillion dollar weigh in 1 dollar bills?;10^6 tons;Weinstein,2012,p. 29;money
+67;How much does 1 trillion dollar weigh in gold?;3x10^4 tons;Weinstein,2012,p. 29;money
+68;Ambulances needed in the US so that everybody can be reached within 8 min?;2x10^4;Weinstein,2012,p. 49;health
+69;Which has more mass, the air or the brains in a movie theater?;400 kg to 4000 kg;Weinstein,2012,p. 53;air
+70;How much energy is stored in an empty plastic water bottle?;4x10^4 J;Weinstein,2012,p. 67;energy
+71;How much energy is stored in an empty glass water bottle?;1.5x10^5 J;Weinstein,2012,p. 71;energy
+72;How much water can be collected from rooftops in liters?;10^5 L;Weinstein,2012,p. 87;environment
+73;What is the maximum amount of light that our eyes can tolerate?;5 mW;Weinstein,2012,p. 103;light
+74;What is the minimum amount of light that our eyes can tolerate?;2x10^-19 J;Weinstein,2012,p. 105;light
+75;How much energy does it take to crack a nut?;0.3 J;Weinstein,2012,p. 153;energy
+76;How far could a mousetrap-powered car travel?;40 m;Weinstein,2012,p. 155;enery
+77;How much work does it take to push a car off the road?;3x10^3 J;Weinstein,2012,p. 159;trafic energy
+78;How much energy does it take to transfer 1 ton of cargo across the US by automobile?;1.6x10^10 J;Weinstein,2012,p. 181;trafic energy cargo
+79;How much energy does it take to transfer 1 ton of cargo across the US by truck?;10^11 J;Weinstein,2012,p. 185;trafic energy cargo
+80;How much energy does it take to transfer 1 ton of cargo across the US by bike?;10^10 J;Weinstein,2012,p. 189;trafic energy cargo
+81;How much energy does it take to transfer 1 ton of cargo across the US by train?;10^12 J;Weinstein,2012,p. 191;trafic energy cargo
+82;How much energy does it take to transfer 1 ton of cargo across the US by airplane?;5x10^10 J;Weinstein,2012,p. 197;trafic energy cargo
+83;What fraction of a car's energy usage could a solar panel provide?;2%;Weinstein,2012,p. 205;trafic environment energy
+84;What is the shortest day the Earth could have without flying apart?;10^4 m/s;Weinstein,2012,p. 229;earth
+85;How many bullets does it take to cut down a tree?;10^4;Weinstein,2012,p. 307;materials
+86;How long does a person's hair typically grow in a lifetime?;9m;Santos,2009,p. 28;health
+87;What is the total length of fingernail growth that one could achieve in a lifetime?;8m;Santos,2009,p. 30;health
+88;How long does it take to read every book in the library?;1.6x10^5 years;Santos,2009,p. 36;time
+89;How many ants would it take to hold up a human?;6x10^4;Santos,2009,p. 39;outside
+90;How long can you shower like taking a bath;16 min;Santos,2009,p. 34;time
+91;How long would it take to drive to the sun?;180 years;Santos,2009,p. 51;traffic
+92;How many people are having sex right now?;4x10^6;Santos,2009,p. 56;health
+93;How many babies are born each day?;4x10^5;Santos,2009,p. 60;health
+94;How long would all of the dna in a human body be if streched out?;10^13m;Santos,2009,p. 64;body
+95;How long of a line could you write before one pen ran out?;3x10^3m;Santos,2009,p. 66;consumption
+96;How tall is the largest building a person could lift?;7m;Santos,2009,p. 127;construction
+97;How many times could all children encircle the globe by holding hands?;100;Santos,2009,p. 95;earth
+98;How long would it take to climb stairs all the way to the moon?;19 years;Santos,2009,p. 115;distance
+99;How high would mount Everest be on a basketball?;0.1cm;Santos,2009,p. 117;distance
+100;How long will it take before the world is covered in gravestones?;1.1x10^6 years;Santos,2009,p. 120;earth
+101;Which is greater: served calories by McDonald's or a nuclear bomb?;70 bombs;Santos,2009,p. 130;health
+102;How many wolves does it take to blow a house down?;2x10^5;Santos,2009,p. 136;construction
+103;What is the gravitational force between a very heavy couple?;2x10^-5;Santos,2009,p. 144;health
+104;How many pill molecules are there for each cell in a body?;10^8;Santos,2009,p. 146;health
+105;How fast someone has to run to burn 5 kg of fat instantly?;2300 m/s;Santos,2009,p. 148;health
+106;How much energy does a professional rider generate?;3x10^5;Santos,2009,p. 155;energy
+107;How fast has a bullet go to circle around the earth?;8x10^3;Santos,2009,p. 157;speed
+108;How far would a golf ball travel on the moon?;1800m;Santos,2009,p. 164;moon
+109;How many helium ballons are needed to hover a person?;10^4;Santos,2009,p. 172;weight 
