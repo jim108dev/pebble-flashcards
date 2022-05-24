@@ -8,26 +8,27 @@ module Storage =
     [<Literal>]
     let separator = ';'
 
-    let read (localPath: string) =
+    let read (path: string) =
+        use reader = new StreamReader(path, new System.Text.UTF8Encoding(true))
         Frame.ReadCsv(
-            localPath,
+            reader,
             separators = separator.ToString(),
             hasHeaders = true,
             inferTypes = true
         )
 
-    let write (localPath: string) (df: Frame<_, _>) =
+    let write (path: string) (df: Frame<_, _>) =
         let df1 = df |> Frame.indexRowsOrdinally
-        use writer = new StreamWriter(localPath, false, new System.Text.UTF8Encoding(true))
+        use writer = new StreamWriter(path, false, new System.Text.UTF8Encoding(true))
         df1.SaveCsv(
             writer,
             includeRowKeys = false,
             separator = separator
         )
 
-    let writeVerbose (localPath: string) (df: Frame<_, _>) =
-        write localPath df
-        printfn $"Written {df.RowCount} rows into {localPath}."
+    let writeVerbose (path: string) (df: Frame<_, _>) =
+        write path df
+        printfn $"Written {df.RowCount} rows into {path}."
 
     let copy (dest: string) (source: string) =
         File.Copy(dest, source, true)

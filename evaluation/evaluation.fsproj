@@ -5,10 +5,10 @@
     <TargetName>evaluation</TargetName>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Source/Domain/DeedleUtil.fs" />
-    <Compile Include="Source/Domain/Types.fs" />
-    <Compile Include="Source/Domain/SuperMemo2.fs" />
-    <Compile Include="Source/Application/Storage.fs" />
+    <Compile Include="Source/Util/Storage.fs" />
+    <Compile Include="Source/Util/DeedleUtil.fs" />
+    <Compile Include="Source/Core/Types.fs" />
+    <Compile Include="Source/Core/SuperMemo2.fs" />
     <Compile Include="Source/Application/Types.fs" />
     <Compile Include="Source/Application/Main.fs" />
     <Compile Include="Source/Shell/Argument.fs" />
