@@ -4,6 +4,7 @@ module Main =
 
     open Argu
     open Application.Types
+    open Application
 
     module A = Argument
 
@@ -42,6 +43,9 @@ module Main =
             let c = loadConfig configPath
 
             match useCase with
+            | A.UseCase.Merge_Feedback -> Main.mergeFeedback c
+            | A.UseCase.Prepare_Next_Session -> Main.prepareNextSession c
             | _ -> printfn "Not implemented yet."
         | _ -> A.printUsage A.parser
         0
+

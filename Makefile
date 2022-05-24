@@ -6,24 +6,22 @@ PYTHON2 := $(VENV_PATH)/python
 
 DOWNLOAD := $(PYTHON2) $(COMM_PATH)/pebble_download.py
 UPLOAD := $(PYTHON2) $(COMM_PATH)/pebble_upload.py
+TRANSLATE_BINARY := $(PYTHON2) $(COMM_PATH)/translate_binary.py
 
 CONN_PATH := ./connection
 CONN_CONF_WATCH := $(CONN_PATH)/config_watch.ini
 CONN_CONF_EMU := $(CONN_PATH)/config_emu.ini
 
-# Evaluation
-EVAL_PATH := ./evaluation
-VENV_PATH := $(EVAL_PATH)/venv/bin
-PYTHON3 := $(VENV_PATH)/python
-
-ALIGN_HISTORY := $(PYTHON3) $(EVAL_PATH)/align_history.py
-PREPARE := $(PYTHON3) $(EVAL_PATH)/prepare_next_session.py
-MERGE := $(PYTHON3) $(EVAL_PATH)/merge_feedback.py
-EVAL_CONF := $(EVAL_PATH)/config.ini
-
-
-# pebble source
 PEBBLE_SRC := ./pebble_app
+
+# Evaluation
+EVAL_PROJECT := ./evaluation/evaluation.fsproj
+EVAL_CONF := -c ./evaluation/Config/Config.yaml
+EVAL_RUN := dotnet run --project=$(EVAL_PROJECT) --
+
+EVAL_PREPARE := -u prepare-next-session
+EVAL_MERGE := -u merge-feedback
+
 
 all:
 	@echo "Please choose explicitly a target."
@@ -52,12 +50,12 @@ download_emu:
 download_watch:
 	$(DOWNLOAD) $(CONN_CONF_WATCH)
 
-# Evaluation
-align_history:
-	$(ALIGN_HISTORY) $(EVAL_CONF)
+translate_binary_watch:
+	$(TRANSLATE_BINARY) $(CONN_CONF_WATCH)
 
+# Evaluation
 prepare_next_session:
-	$(PREPARE) $(EVAL_CONF)
+	$(EVAL_RUN) $(EVAL_CONF) $(EVAL_PREPARE)
 
 merge_feedback:
-	$(MERGE) $(EVAL_CONF)
+	$(EVAL_RUN) $(EVAL_CONF) $(EVAL_MERGE)

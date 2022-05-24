@@ -13,6 +13,13 @@
 #define LOG_TAG 1
 #define TIMEOUT 30000 //1/2 minute
 
+typedef struct InputRecord
+{
+    char id[MAX_SMALL_TEXT_LEN];        //  16 bytes
+    char text1[MAX_TEXT_LEN];           //  85 bytes
+    char text2[MAX_TEXT_LEN];           //  85 bytes
+} InputRecord;                          // 186 bytes
+
 void download_init(DownloadSuccessCallback success, DownloadFailCallback fail);
 
 void download_deinit();

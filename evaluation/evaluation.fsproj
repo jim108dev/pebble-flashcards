@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <TargetName>pepple-flashcards</TargetName>
+    <TargetName>evaluation</TargetName>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Source/Domain/DeedleUtil.fs" />

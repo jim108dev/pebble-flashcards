@@ -15,6 +15,7 @@ typedef struct Record
     time_t stop;                        //   4 bytes
 } Record;                               // 195 bytes
 
+
 typedef void (*DownloadSuccessCallback)(Record records[], uint8_t max_records);
 typedef void (*DownloadFailCallback)(char message[MAX_TEXT_LEN]);
 

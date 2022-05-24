@@ -181,7 +181,7 @@ static void show_last_window()
 
 static void download_success(Record *records, uint8_t max_records)
 {
-  int records_size = 0;
+  
   for (int i = 0; i < max_records; i++)
   {
     int status_code = pers_write_record(records[i], i);

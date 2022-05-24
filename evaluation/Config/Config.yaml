@@ -9,3 +9,5 @@ feedback:
 next_session:
   file: data/upload.csv
   max_records: 20
+  max_period: 1.0
+  new_record_period: 0.5

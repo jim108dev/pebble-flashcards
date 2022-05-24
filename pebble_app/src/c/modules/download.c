@@ -32,7 +32,7 @@ static void inbox_received_handler(DictionaryIterator *iter, void *context)
     s_max_records = packet_get_integer(iter, DOWNLOAD_KEY_MAX);
     s_records = malloc(sizeof(Record) * s_max_records);
 
-    DEBUG("Max records (%d) received.",s_max_records);
+    DEBUG("Max records (%d) received.", s_max_records);
     return;
   }
 
@@ -52,12 +52,10 @@ static void inbox_received_handler(DictionaryIterator *iter, void *context)
     dp_fill_small_text(r.id, state);
     dp_fill_text(r.text1, state);
     dp_fill_text(r.text2, state);
-
-    r.feedback = data_processor_get_int(state);
-    r.start = data_processor_get_int(state);
-    r.stop = data_processor_get_int(state);
-
-    data_processor_destroy(state);
+    r.feedback = 0;
+    r.start = 0;
+    r.stop = 0;
+    data_processor_destroy(state);    
 
     DEBUG_RECORD(r);
 
@@ -85,13 +83,14 @@ static void timeout_timer_handler(void *context)
   s_fail("Connection timeout");
 }
 
-void download_init(DownloadSuccessCallback success,DownloadFailCallback fail)
+void download_init(DownloadSuccessCallback success, DownloadFailCallback fail)
 {
   s_success = success;
   s_fail = fail;
-  s_app_message_handle = events_app_message_subscribe_handlers((EventAppMessageHandlers){
-                                                                   .received = inbox_received_handler},
-                                                               NULL);
+  s_app_message_handle =
+      events_app_message_subscribe_handlers((EventAppMessageHandlers){
+                                                .received = inbox_received_handler},
+                                            NULL);
   events_app_message_request_inbox_size(INBOX_SIZE);
   events_app_message_open();
 
